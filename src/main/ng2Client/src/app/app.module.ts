@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {Dashboard} from "./dashboard";
 import {DashboardDataService} from "./dashboard-data.service";
+import {HelloWorld} from "./helloWorld.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    Dashboard
+    Dashboard,
+    HelloWorld
   ],
   imports: [
     BrowserModule,
