@@ -65,7 +65,7 @@ public class CisProvider {
         try {
             Class.forName(EmbeddedDriver.class.getName()).newInstance();
             //Get a connection
-            conn = DriverManager.getConnection("jdbc:derby:.\\cis1.db;create=true");
+            conn = DriverManager.getConnection("jdbc:derby:.\\cis2.db;create=true");
             stmt = conn.createStatement();
         } catch (Exception except) {
             except.printStackTrace();
