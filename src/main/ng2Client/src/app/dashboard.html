@@ -1,0 +1,31 @@
+<div class="panel panel-default panel-tall panel-table" data-qa="transfers-component" role="main">
+  <div class="panel-heading" data-qa="transfers-header">
+    <h1 class="panel-title pull-left">
+      <span aria-hidden="true" class="sprite sprite-blue-light-tracking"></span>Dashboards
+    </h1>
+  </div>
+  <div>
+    <label> Enter Table Name </label>
+    <input type="text" [(ngModel)]="tableName" placeholder="Enter Table Name"/>
+    <button (click)="getData();">Fetch Data</button>
+  </div>
+  <div class="panel-body row-height" *ngIf="dataLoaded">
+    <table class="table table-fixed" data-qa="transfers-table">
+      <thead>
+      <tr>
+        <th *ngFor="let entry of dataKeys" class="col-xs-1" data-qa="transfers-status-header">
+          <div>{{entry}}</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of resources" data-qa="transfer-row">
+        <td *ngFor="let data of getValues(count)" class="col-xs-1" data-qa="transfer-activity">
+          <span>{{data}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!dataLoaded" class="overlay panel-overlay" data-qa="transfers-loading-overlay">
+</div>

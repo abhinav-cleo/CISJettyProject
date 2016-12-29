@@ -97,8 +97,8 @@
             <artifactId>frontend-maven-plugin</artifactId>
             <version>1.0</version>
             <configuration>
-                <workingDirectory>src/main/DashboardPortal</workingDirectory>
-                <installDirectory>src/main/DashboardPortal</installDirectory>
+                <workingDirectory>src/main/ng2Client</workingDirectory>
+                <installDirectory>src/main/ng2Client</installDirectory>
             </configuration>
             <executions>
                 <!-- It will install nodejs and npm -->
@@ -152,7 +152,7 @@
                         <outputDirectory>${basedir}/src/main/webapp</outputDirectory>
                         <resources>
                             <resource>
-                                <directory>src/main/DashboardPortal/dist</directory>
+                                <directory>src/main/ng2Client/dist</directory>
                                 <filtering>true</filtering>
                             </resource>
                         </resources>
