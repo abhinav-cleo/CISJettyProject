@@ -10,3 +10,4 @@ src/main/ng2Client/dist
 src/main/ng2Client/node
 src/main/ng2Client/etc
 src/main/ng2Client/node_modules
+*.db
