@@ -7,7 +7,7 @@ export class DashboardDataService {
   constructor(private http: Http) { }
   readData(param) {
     return this.http
-      .get("http://localhost:8680/rest/cis/info?table="+param)
+      .get(param)
       .map(response => {
         return response
       });

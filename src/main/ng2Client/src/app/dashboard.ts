@@ -11,7 +11,7 @@ export class Dashboard {
     public dataLoaded: boolean = false;
     public dataKeys: string[] = [];
     public tableName: string = "STOCK";
-    devices = ['Stock', 'VlTransfer'];
+    devices = ['Stock', 'VlTransfers'];
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService) {
     }
@@ -29,7 +29,13 @@ export class Dashboard {
     private getData() {
         this.resources = [];
         this.dataKeys = [];
-        return this._backend.readData(this.selectedDevice).subscribe(
+        var url = '';
+        if(this.selectedDevice == 'Stock'){
+            url = 'http://localhost:8680/rest/cis/info?table='+this.selectedDevice;
+        }else{
+            url = 'http://localhost:8680/rest/transfers/data?table='+this.selectedDevice
+        }
+        return this._backend.readData(url).subscribe(
             (data: Response) => {
                 console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
                 this.resources = JSON.parse(data['_body']);
