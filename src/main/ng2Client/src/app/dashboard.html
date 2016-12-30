@@ -5,9 +5,10 @@
     </h1>
   </div>
   <div>
-    <label> Enter Table Name </label>
-    <input type="text" [(ngModel)]="tableName" placeholder="Enter Table Name"/>
-    <button (click)="getData();">Fetch Data</button>
+      <label> Select Table Name </label>
+      <select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)" name="sel2">
+          <option [value]="i" *ngFor="let i of devices">{{i}}</option>
+      </select>
   </div>
   <div class="panel-body row-height" *ngIf="dataLoaded">
     <table class="table table-fixed" data-qa="transfers-table">
@@ -29,3 +30,4 @@
 </div>
 <div *ngIf="!dataLoaded" class="overlay panel-overlay" data-qa="transfers-loading-overlay">
 </div>
+
