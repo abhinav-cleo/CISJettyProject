@@ -14,6 +14,7 @@ export class Dashboard {
     devices = ['Stock', 'VlTransfers'];
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService) {
+        this.dataLoaded = false;
     }
 
     onChange(newValue) {
@@ -23,6 +24,7 @@ export class Dashboard {
     }
 
     ngOnInit() {
+        this.dataLoaded = false;
         this.read = this.getData();
     }
 
