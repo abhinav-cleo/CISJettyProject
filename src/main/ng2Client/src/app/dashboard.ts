@@ -33,7 +33,7 @@ export class Dashboard {
         if(this.selectedDevice == 'Stock'){
             url = 'http://localhost:8680/rest/cis/info?table='+this.selectedDevice;
         }else{
-            url = 'http://localhost:8680/rest/transfers/data?table='+this.selectedDevice
+            url = 'http://10.20.101.250:8680/rest/transfers/data?table='+this.selectedDevice
         }
         return this._backend.readData(url).subscribe(
             (data: Response) => {
