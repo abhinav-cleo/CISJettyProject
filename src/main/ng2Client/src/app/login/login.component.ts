@@ -19,23 +19,24 @@ export class LoginComponent implements OnInit {
   }
 
     signed() {
-        var params = {
-            "id":this.user,
-            "password": this.password
-        };
-        this._backend.login(params).subscribe(
-            (data:Response) => {
-                if(JSON.parse(data["_body"]).status == 1){
-                    this.router.navigate(['/dashboard']);
-                }
-                else {
-                    this.router.navigate(['/login']);
-                }
-            },
-            error => {
-                this.router.navigate(['/login']);
-            },
-            () => console.log('Logging in Complete')
-        );
+        this.router.navigate(['dashboard']);
+        // var params = {
+        //     "id":this.user,
+        //     "password": this.password
+        // };
+        // this._backend.login(params).subscribe(
+        //     (data:Response) => {
+        //         if(JSON.parse(data["_body"]).status == 1){
+        //             this.router.navigate(['/dashboard']);
+        //         }
+        //         else {
+        //             this.router.navigate(['/login']);
+        //         }
+        //     },
+        //     error => {
+        //         this.router.navigate(['/login']);
+        //     },
+        //     () => console.log('Logging in Complete')
+        // );
     }
 }

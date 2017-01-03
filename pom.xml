@@ -93,7 +93,8 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty.version}</version>
         <configuration>
-          <httpConnector>
+            <contextPath>/</contextPath>
+            <httpConnector>
             <port>8680</port>
           </httpConnector>
         </configuration>

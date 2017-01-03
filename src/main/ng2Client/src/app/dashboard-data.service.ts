@@ -8,7 +8,7 @@ export class DashboardDataService {
   constructor(private http: Http) { }
   readData(param) {
       return Observable.interval(5000)
-          .flatMap(() => this.http.get(param))
+          .switchMap(() => this.http.get(param))
           .map(response => response);
   }
     login(params) {
