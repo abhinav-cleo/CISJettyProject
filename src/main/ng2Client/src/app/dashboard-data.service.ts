@@ -11,4 +11,16 @@ export class DashboardDataService {
           .flatMap(() => this.http.get(param))
           .map(response => response);
   }
+    login(params) {
+        return this.http
+            .post("http://localhost:8680/rest/cis/login", params)
+            .map(response => {
+                return response
+            });
+    }
+
+    authData(){
+        return true
+    }
+
 }
