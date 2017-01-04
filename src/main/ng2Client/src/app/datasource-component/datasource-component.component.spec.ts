@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DatasourceComponentComponent } from './datasource-component.component';
+import { DatasourceComponent } from './datasource-component.component';
 
-describe('DatasourceComponentComponent', () => {
-  let component: DatasourceComponentComponent;
-  let fixture: ComponentFixture<DatasourceComponentComponent>;
+describe('DatasourceComponent', () => {
+  let component: DatasourceComponent;
+  let fixture: ComponentFixture<DatasourceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatasourceComponentComponent ]
+      declarations: [ DatasourceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DatasourceComponentComponent);
+    fixture = TestBed.createComponent(DatasourceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

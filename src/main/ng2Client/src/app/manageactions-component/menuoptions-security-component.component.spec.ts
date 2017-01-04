@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MenuoptionsSecurityComponentComponent } from './menuoptions-security-component.component';
+import { ManageActionsComponent } from './menuoptions-security-component.component';
 
-describe('MenuoptionsSecurityComponentComponent', () => {
-  let component: MenuoptionsSecurityComponentComponent;
-  let fixture: ComponentFixture<MenuoptionsSecurityComponentComponent>;
+describe('ManageActionsComponent', () => {
+  let component: ManageActionsComponent;
+  let fixture: ComponentFixture<ManageActionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuoptionsSecurityComponentComponent ]
+      declarations: [ ManageActionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MenuoptionsSecurityComponentComponent);
+    fixture = TestBed.createComponent(ManageActionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

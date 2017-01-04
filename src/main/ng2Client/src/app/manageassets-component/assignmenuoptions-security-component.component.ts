@@ -3,11 +3,11 @@ import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
 
 @Component({
-  selector: 'app-datasource-component',
-  templateUrl: './datasource-component.component.html',
-  styleUrls: ['./datasource-component.component.css']
+  selector: 'app-assignmenuoptions-security-component',
+  templateUrl: './assignmenuoptions-security-component.component.html',
+  styleUrls: ['./assignmenuoptions-security-component.component.css']
 })
-export class DatasourceComponent implements OnInit {
+export class ManageAssetsComponent implements OnInit {
 
   public componentTitle:string ="";
   public createNewComponent = "";
@@ -15,19 +15,17 @@ export class DatasourceComponent implements OnInit {
   public dataLoaded: boolean = false;
   public dataKeys: string[] = [];
   public name: string = "";
-  public url: string = "";
   public showForm:boolean =false;
 
   toggleUserForm(){
     this.showForm = !this.showForm;
     this.name = "";
-    this.url = "";
     return this.showForm;
   }
 
   constructor(private _backend: DashboardDataService) {
-    this.componentTitle = "CIS DataSource Management";
-    this.createNewComponent = "New CIS DataSource";
+    this.componentTitle = "CIS Assets Management";
+    this.createNewComponent = "New CIS Asset";
   }
 
 
@@ -71,19 +69,17 @@ export class DatasourceComponent implements OnInit {
   writeData(){
     var data={
       name: "",
-      url: ""
     }
 
     data.name = this.name;
-    data.url = this.url;
     console.log(data);
     this.showForm = false;
     this._backend.writeFactoryData(data).subscribe(
         (data: Response) => {
-            console.log("User created Successfully");
+          console.log("User created Successfully");
         },
         error => {
-            console.log("user creation failed");
+          console.log("user creation failed");
         },
         () => console.log('User API Execution Completed')
     );

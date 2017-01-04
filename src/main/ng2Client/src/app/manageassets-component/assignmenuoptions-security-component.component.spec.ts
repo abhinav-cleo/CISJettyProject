@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AssignmenuoptionsSecurityComponentComponent } from './assignmenuoptions-security-component.component';
+import { ManageAssetsComponent } from './assignmenuoptions-security-component.component';
 
-describe('AssignmenuoptionsSecurityComponentComponent', () => {
-  let component: AssignmenuoptionsSecurityComponentComponent;
-  let fixture: ComponentFixture<AssignmenuoptionsSecurityComponentComponent>;
+describe('ManageAssetsComponent', () => {
+  let component: ManageAssetsComponent;
+  let fixture: ComponentFixture<ManageAssetsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssignmenuoptionsSecurityComponentComponent ]
+      declarations: [ ManageAssetsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssignmenuoptionsSecurityComponentComponent);
+    fixture = TestBed.createComponent(ManageAssetsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

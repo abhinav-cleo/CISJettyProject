@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AppuserSecurityComponentComponent } from './appuser-security-component.component';
+import { AppuserSecurityComponent } from './appuser-security-component.component';
 
-describe('AppuserSecurityComponentComponent', () => {
-  let component: AppuserSecurityComponentComponent;
-  let fixture: ComponentFixture<AppuserSecurityComponentComponent>;
+describe('AppuserSecurityComponent', () => {
+  let component: AppuserSecurityComponent;
+  let fixture: ComponentFixture<AppuserSecurityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppuserSecurityComponentComponent ]
+      declarations: [ AppuserSecurityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppuserSecurityComponentComponent);
+    fixture = TestBed.createComponent(AppuserSecurityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
