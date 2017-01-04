@@ -90,6 +90,11 @@
           <artifactId>commons-io</artifactId>
           <version>2.4</version>
       </dependency>
+      <dependency>
+          <groupId>org.apache.kafka</groupId>
+          <artifactId>kafka_2.9.2</artifactId>
+          <version>0.8.2.2</version>
+      </dependency>
 
   </dependencies>
 
@@ -110,7 +115,8 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty.version}</version>
         <configuration>
-          <httpConnector>
+            <contextPath>/</contextPath>
+            <httpConnector>
             <port>8680</port>
           </httpConnector>
         </configuration>
