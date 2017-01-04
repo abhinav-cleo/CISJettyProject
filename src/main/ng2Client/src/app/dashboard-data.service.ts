@@ -29,6 +29,13 @@ export class DashboardDataService {
             .map(response => response);
     }
 
+    writeFactoryData(data) {
+        var url = "http://localhost:8680/rest/cis/writedata"; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.post(url,data))
+            .map(response => response);
+    }
+
     authData() {
         return true
     }
