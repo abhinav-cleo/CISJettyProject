@@ -1,4 +1,4 @@
-package com.cleo.cis.server.kafka;
+package com.cleo.cis.server.kafka.sample.producer;
 
 import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
