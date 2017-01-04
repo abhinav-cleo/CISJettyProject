@@ -33,11 +33,11 @@ export const routes: Routes = [
         component:MainComponentComponent,
         children:[
             {
-                path: '',
+                path: 'admin',
                 component:AdminComponentComponent,
                 children: [
                     {
-                        path: '',
+                        path: 'datasource',
                         component: DatasourceComponentComponent
                     },
                     {
@@ -49,7 +49,7 @@ export const routes: Routes = [
                         component: SecurityComponentComponent,
                         children: [
                             {
-                                path: '',
+                                path: 'dashboard',
                                 component: Dashboard
                             },
                             {
