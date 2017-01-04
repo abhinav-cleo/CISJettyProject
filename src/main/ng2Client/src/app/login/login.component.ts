@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
     signed() {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/main/']);
         // var params = {
         //     "id":this.user,
         //     "password": this.password
