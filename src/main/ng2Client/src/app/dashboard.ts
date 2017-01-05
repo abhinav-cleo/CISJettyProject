@@ -32,7 +32,7 @@ export class DashboardComponent {
         var dbResources  = {
             Stock: "http://localhost:8680/rest/cis/info?table=",
             VlTransfers: "http://localhost:8680/rest/transfers/data?table=",
-            DynamoDB : "http://localhost:8680/rest/awsService/getEventsFromDB"
+            EventsTable : "http://localhost:8680/rest/awsService/getEventsFromDB?table="
         }
         this.resources = [];
         this.dataKeys = [];

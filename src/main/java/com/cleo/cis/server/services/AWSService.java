@@ -5,10 +5,7 @@ import com.cleo.cis.server.AWS.SQS.AWSSQSClient;
 import com.cleo.cis.server.auth.shiros.ShirosProvider;
 import org.json.JSONArray;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -58,7 +55,7 @@ public class AWSService {
   @GET
   @Path("/getEventsFromDB")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getEventsFromDB(){
+  public Response getEventsFromDB(@QueryParam("table") String tableName){
     JSONArray eventsFromTable = AWSDynamoClient.getEventsFromTable();
     return Response.status(Response.Status.OK).entity(eventsFromTable.toString())
             .header("Access-Control-Allow-Origin", "*")
