@@ -1,9 +1,11 @@
 package com.cleo.cis.server.kafka.sample.consumer;
 
+import com.cleo.cis.server.mongo.sample.EventRepo;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class ConsumerGroupExample {
     }
   }
 
-  public void run(int a_numThreads) {
+  public void run(int a_numThreads, EventRepo eventRepo) {
     Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
     topicCountMap.put(topic, new Integer(a_numThreads));
     Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
@@ -52,7 +54,7 @@ public class ConsumerGroupExample {
     //
     int threadNumber = 0;
     for (final KafkaStream stream : streams) {
-      executor.submit(new ConsumerTest(stream, threadNumber));
+      executor.submit(new ConsumerTest(stream, threadNumber, eventRepo));
       threadNumber++;
     }
   }
@@ -69,14 +71,15 @@ public class ConsumerGroupExample {
     return new ConsumerConfig(props);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws UnknownHostException {
     String zooKeeper = "ec2-35-164-171-235.us-west-2.compute.amazonaws.com:2181";
     String groupId = "test";
     String topic = "test";
     int threads = 1;
 
+    EventRepo eventRepo = new EventRepo("ec2-35-166-252-121.us-west-2.compute.amazonaws.com", 27017, "siteA", "test");
     ConsumerGroupExample example = new ConsumerGroupExample(zooKeeper, groupId, topic);
-    example.run(threads);
+    example.run(threads, eventRepo);
 
     try {
       Thread.sleep(10000);

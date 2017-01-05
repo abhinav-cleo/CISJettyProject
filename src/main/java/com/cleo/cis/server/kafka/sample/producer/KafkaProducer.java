@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+/**
+ * Created by santoshsingh on 04/01/17.
+ */
 public class KafkaProducer {
   private static Producer<Integer, String> producer;
   private static final String topic = "test";
