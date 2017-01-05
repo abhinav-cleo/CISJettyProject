@@ -97,6 +97,7 @@ export class DashboardDataService {
     }
 
     assignRoleToUser(param){
+        console.log("COnsoloing API Log " + param.user + "/" + param.role);
         var url = "http://localhost:8680/rest/authService/assignRole/"+param.user+"/"+param.role; // TODO: dummy service, to be changed as per requirements
         return this.http.get(url)
             .map(response => response);
