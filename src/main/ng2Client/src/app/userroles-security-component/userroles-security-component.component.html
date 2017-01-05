@@ -32,12 +32,23 @@
         <td>
           <strong>Role Description</strong>
         </td>
+        <td>
+          <strong>Role Actions</strong>
+        </td>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let count of resources" data-qa="transfer-row">
         <td>{{count}}</td>
         <td>{{count}}</td>
+          <td>
+              <span>
+                  <button (click)="roleRemove(count)"><i class="fa fa-eraser" aria-hidden="true"></i> Remove Role</button>
+              </span>
+              <span>
+                  <button (click)="roleDelete(count)"><i class="fa fa-window-close" aria-hidden="true"></i> Delete Role</button>
+              </span>
+          </td>
       </tr>
       </tbody>
     </table>

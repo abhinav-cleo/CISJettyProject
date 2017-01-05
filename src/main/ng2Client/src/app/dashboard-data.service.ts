@@ -54,9 +54,8 @@ export class DashboardDataService {
     }
 
     removeUser(param){
-        var url = "http://localhost:8680/rest/authService/removeUser/"+param.user; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
-            .switchMap(() => this.http.get(url))
+        var url = "http://localhost:8680/rest/authService/removeUser/"+param; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
             .map(response => response);
     }
 
@@ -88,16 +87,14 @@ export class DashboardDataService {
     }
 
     deleteRole(param){
-        var url = "http://localhost:8680/rest/authService/deleteRole/"+param.role; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
-            .switchMap(() => this.http.get(url))
+        var url = "http://localhost:8680/rest/authService/deleteRole/"+param; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
             .map(response => response);
     }
 
     removeRole(param){
-        var url = "http://localhost:8680/rest/authService/removeRole/"+param.role; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
-            .switchMap(() => this.http.get(url))
+        var url = "http://localhost:8680/rest/authService/removeRole/"+param; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
             .map(response => response);
     }
 
