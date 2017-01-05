@@ -43,6 +43,8 @@ public class ShirosProvider {
 
   public static boolean loginUser(String userName, String password) throws AuthException {
     Subject currentUser = SecurityUtils.getSubject();
+    System.out.println("user = " + userName);
+    System.out.println("passwpord = " + password);
     authenticateUser(currentUser,userName,password);
     currentUser.logout();
     return true;
