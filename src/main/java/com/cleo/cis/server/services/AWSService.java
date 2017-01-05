@@ -22,8 +22,9 @@ public class AWSService {
   @POST
   @Path("/sendMessage")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response sendMessage(String message){
+  public Response sendMessage(String message) throws InterruptedException {
     AWSSQSClient.sendMessage(message);
+    AWSDynamoClient.addEventToTable(message);
     return Response.status(Response.Status.OK).entity("message sent successfully.")
             .header("Access-Control-Allow-Origin", "*")
             .header("Access-Control-Allow-Methods", "*")
