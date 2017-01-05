@@ -25,7 +25,7 @@
     <div *ngIf="dataLoaded">
         <table class="table table-bordered table-striped table-responsive" data-qa="transfers-table">
             <thead>
-            <tr>
+            <tr *ngIf="!permissionsFetched">
                 <td>
                     <strong>Role Names</strong>
                 </td>
@@ -35,10 +35,23 @@
                 <td>
                     <strong>Role Actions</strong>
                 </td>
-                <td *ngIf="permissionsFetched">
+            </tr>
+
+            <tr *ngIf="permissionsFetched">
+                <td>
+                    <strong>Role Names</strong>
+                </td>
+                <td>
+                    <strong>Role Description</strong>
+                </td>
+                <td>
                     <strong>Role Permissions</strong>
                 </td>
+                <td>
+                    <strong>Role Actions</strong>
+                </td>
             </tr>
+
             </thead>
             <tbody>
             <tr *ngFor="let count of resources; let i = index" data-qa="transfer-row" [attr.data-index]="i">
