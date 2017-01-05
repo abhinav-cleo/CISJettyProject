@@ -26,15 +26,18 @@
     <table class="table table-bordered table-striped table-responsive" data-qa="transfers-table">
       <thead>
       <tr>
-        <th *ngFor="let entry of dataKeys" class="col-xs-1" data-qa="transfers-status-header">
-          <div>{{entry.toUpperCase()}}</div>
-        </th>
+        <td>
+          <strong>Role Names</strong>
+        </td>
+        <td>
+          <strong>Role Description</strong>
+        </td>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let count of resources" data-qa="transfer-row">
-        <td *ngFor="let data of getValues(count)" class="col-xs-1" data-qa="transfer-activity">
-          <span>{{data}}</span></td>
+        <td>{{count}}</td>
+        <td>{{count}}</td>
       </tr>
       </tbody>
     </table>

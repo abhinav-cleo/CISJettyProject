@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
+      <label for="example-email-input" class="col-xs-2 col-form-label">User Password</label>
       <div class="col-xs-10">
         <input class="form-control" type="password" placeholder="Enter User Password" id="example-email-input"
                [(ngModel)]="password">
@@ -34,15 +34,18 @@
     <table class="table table-bordered table-striped table-responsive" data-qa="transfers-table">
       <thead>
       <tr>
-        <th *ngFor="let entry of dataKeys" class="col-xs-1" data-qa="transfers-status-header">
-          <div>{{entry.toUpperCase()}}</div>
-        </th>
+        <td>
+          <strong>Username</strong>
+        </td>
+        <td>
+          <strong>Name</strong>
+        </td>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let count of resources" data-qa="transfer-row">
-        <td *ngFor="let data of getValues(count)" class="col-xs-1" data-qa="transfer-activity">
-          <span>{{data}}</span></td>
+        <td>{{count}}</td>
+        <td>{{count}}</td>
       </tr>
       </tbody>
     </table>

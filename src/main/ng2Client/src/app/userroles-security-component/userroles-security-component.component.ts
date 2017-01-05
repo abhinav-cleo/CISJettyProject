@@ -32,11 +32,11 @@ export class UserrolesSecurityComponent implements OnInit {
   private getData() {
     this.resources = [];
     this.dataKeys = [];
-    return this._backend.readFactoryData().subscribe(
+    return this._backend.getAllRoles().subscribe(
         (data: Response) => {
           console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
           this.resources = JSON.parse(data['_body']);
-          this.dataKeys = this.generateKeys(this.resources[0]);
+          this.resources = this.resources.reverse();
           this.dataLoaded = true;
         },
         error => {
@@ -47,39 +47,19 @@ export class UserrolesSecurityComponent implements OnInit {
     );
   }
 
-  generateKeys(obj): string[] {
-    let keys: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        keys.push(prop);
-    }
-    return keys;
-  }
-
-  getValues(obj): string[] {
-    let values: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        values.push(obj[prop]); // value
-    }
-    return values
-  }
-
-
   writeData(){
     var data={
-      name: "",
+      role: "",
     }
 
-    data.name = this.name;
-    console.log(data);
+    data.role = this.name;
     this.showForm = false;
-    this._backend.writeFactoryData(data).subscribe(
+    this._backend.createRole(data).subscribe(
         (data: Response) => {
-          console.log("User created Successfully");
+          console.log("User Role Successfully");
         },
         error => {
-          console.log("user creation failed");
+          console.log("user Role failed");
         },
         () => console.log('User API Execution Completed')
     );
