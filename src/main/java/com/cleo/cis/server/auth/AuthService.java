@@ -24,7 +24,12 @@ public class AuthService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response users(){
     JSONArray users = ShirosProvider.getUsers();
-    return Response.status(Response.Status.OK).entity(users.toString()).build();
+    return Response.status(Response.Status.OK).entity(users.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
+
   }
 
   @GET
@@ -32,7 +37,11 @@ public class AuthService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response roles(){
     JSONArray roles = ShirosProvider.getRoles();
-    return Response.status(Response.Status.OK).entity(roles.toString()).build();
+    return Response.status(Response.Status.OK).entity(roles.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -40,7 +49,11 @@ public class AuthService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response roles(@PathParam("userName") String userName){
     JSONArray roles = ShirosProvider.getRoles(userName);
-    return Response.status(Response.Status.OK).entity(roles.toString()).build();
+    return Response.status(Response.Status.OK).entity(roles.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -48,7 +61,11 @@ public class AuthService {
   @Produces(MediaType.APPLICATION_JSON)
   public Response permissions(@PathParam("roleName") String roleName){
     JSONArray roles = ShirosProvider.permissions(roleName);
-    return Response.status(Response.Status.OK).entity(roles.toString()).build();
+    return Response.status(Response.Status.OK).entity(roles.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -67,16 +84,24 @@ public class AuthService {
       responseJSON = new JSONObject();
       responseJSON.put("message","user not found");
       responseJSON.put("error",ex.getMessage());
-      return Response.status(Response.Status.NOT_FOUND).entity(responseJSON.toString()).build();
+      return Response.status(Response.Status.NOT_FOUND).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
   @Path("/createUser/{userName}/{password}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response createUser(@PathParam("userName") String userName,
-                        @PathParam("password") String password) throws Exception {
+                             @PathParam("password") String password) throws Exception {
     JSONObject responseJSON = new JSONObject();
     responseJSON.put("userName",userName);
     responseJSON.put("password",password);
@@ -88,9 +113,17 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","user creation failed");
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -106,9 +139,17 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","user creation failed");
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -124,9 +165,17 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","user creation failed");
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -143,16 +192,24 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","user creation failed");
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
   @Path("/addPermission/{roleName}/{assetName}/{action}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response addPermission(@PathParam("roleName") String roleName,
-                             @PathParam("assetName") String assetName,
+                                @PathParam("assetName") String assetName,
                                 @PathParam("action") String action) throws Exception {
     JSONObject responseJSON = new JSONObject();
     responseJSON.put("assetName",assetName);
@@ -165,9 +222,17 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","user creation failed");
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
 
@@ -185,9 +250,17 @@ public class AuthService {
       responseJSON = new JSONObject();
       responseJSON.put("message","user deletion failed");
       responseJSON.put("error",ex.getMessage());
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -204,9 +277,17 @@ public class AuthService {
       responseJSON = new JSONObject();
       responseJSON.put("message","user deletion failed");
       responseJSON.put("error",ex.getMessage());
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -221,9 +302,17 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","Failed to add asset " + ex.getMessage());
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
+
   }
 
   @GET
@@ -238,9 +327,16 @@ public class AuthService {
       ex.printStackTrace();
       responseJSON = new JSONObject();
       responseJSON.put("message","Failed to add asset " + ex.getMessage());
-      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString()).build();
+      Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(responseJSON.toString())
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+
     }
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
   }
 
   @GET
@@ -250,7 +346,10 @@ public class AuthService {
     JSONObject responseJSON = new JSONObject();
     JSONArray allAssets = AssetRepo.getAllAssets();
     responseJSON.put("assets",allAssets);
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
   }
 
   @GET
@@ -260,6 +359,9 @@ public class AuthService {
     JSONObject responseJSON = new JSONObject();
     JSONArray allActions = ActionsRepo.getAllActions();
     responseJSON.put("actions",allActions);
-    return Response.status(Response.Status.OK).entity(responseJSON.toString()).build();
+    return Response.status(Response.Status.OK).entity(responseJSON.toString())
+            .header("Access-Control-Allow-Origin", "*")
+            .header("Access-Control-Allow-Methods", "*")
+            .build();
   }
 }

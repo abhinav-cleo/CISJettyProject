@@ -14,16 +14,14 @@ export class AppuserSecurityComponent implements OnInit {
   public resources: any[] = [];
   public dataLoaded: boolean = false;
   public dataKeys: string[] = [];
-  public name: string = "";
-  public email: string = "";
+  public password: string = "";
   public username: string = "";
   public showForm:boolean =false;
 
   toggleUserForm(){
     this.showForm = !this.showForm;
-    this.name = "";
     this.username = "";
-    this.email = "";
+    this.password = "";
     return this.showForm;
   }
 
@@ -36,7 +34,7 @@ export class AppuserSecurityComponent implements OnInit {
   private getData() {
     this.resources = [];
     this.dataKeys = [];
-    return this._backend.readFactoryData().subscribe(
+    return this._backend.getUsers().subscribe(
         (data: Response) => {
           console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
           this.resources = JSON.parse(data['_body']);
@@ -72,17 +70,15 @@ export class AppuserSecurityComponent implements OnInit {
 
   writeData(){
     var data={
-      name: "",
-      email: "",
-      username: ""
+      username: "",
+      password: "",
     }
 
-    data.name = this.name;
     data.username = this.username;
-    data.email = this.email;
+    data.password = this.password;
     console.log(data);
     this.showForm = false;
-    this._backend.writeFactoryData(data).subscribe(
+    this._backend.createUser(data).subscribe(
         (data: Response) => {
           console.log("User created Successfully");
         },

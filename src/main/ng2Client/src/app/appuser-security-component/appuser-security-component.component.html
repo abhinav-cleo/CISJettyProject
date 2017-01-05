@@ -12,25 +12,18 @@
   <br>
   <div *ngIf="showForm">
     <div class="form-group row">
-      <label for="example-text-input" class="col-xs-2 col-form-label">Name</label>
+      <label for="example-text-input" class="col-xs-2 col-form-label">User Name</label>
       <div class="col-xs-10">
-        <input class="form-control" type="text" placeholder="Enter Full Name" id="example-text-input"
-               [(ngModel)]="name">
+        <input class="form-control" type="text" placeholder="Enter User Name" id="example-text-input"
+               [(ngModel)]="username">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="example-email-input" class="col-xs-2 col-form-label">Email</label>
       <div class="col-xs-10">
-        <input class="form-control" type="email" placeholder="Enter User Email" id="example-email-input"
-               [(ngModel)]="email">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="example-url-input" class="col-xs-2 col-form-label">User name</label>
-      <div class="col-xs-10">
-        <input class="form-control" type="text" placeholder="Enter Username" id="example-url-input"
-               [(ngModel)]="username">
+        <input class="form-control" type="password" placeholder="Enter User Password" id="example-email-input"
+               [(ngModel)]="password">
       </div>
     </div>
     <button type="submit" class="btn btn-primary" (click)="writeData();">Submit {{createNewComponent}}</button>
