@@ -48,7 +48,7 @@ export class DashboardDataService {
     }
 
     createUser(param){
-        var url = "http://localhost:8680/rest/authService/createUser/"+param.user+"/"+param.password; // TODO: dummy service, to be changed as per requirements
+        var url = "http://localhost:8680/rest/authService/createUser/"+param.username+"/"+param.password; // TODO: dummy service, to be changed as per requirements
         return this.http.get(url)
             .map(response => response);
     }

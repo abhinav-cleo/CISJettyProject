@@ -32,11 +32,10 @@ export class ManageAssetsComponent implements OnInit {
   private getData() {
     this.resources = [];
     this.dataKeys = [];
-    return this._backend.readFactoryData().subscribe(
+    return this._backend.getAssets().subscribe(
         (data: Response) => {
-          console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
-          this.resources = JSON.parse(data['_body']);
-          this.dataKeys = this.generateKeys(this.resources[0]);
+          this.resources = JSON.parse(data['_body']).assets;
+          this.resources = this.resources.reverse();
           this.dataLoaded = true;
         },
         error => {
@@ -47,39 +46,20 @@ export class ManageAssetsComponent implements OnInit {
     );
   }
 
-  generateKeys(obj): string[] {
-    let keys: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        keys.push(prop);
-    }
-    return keys;
-  }
-
-  getValues(obj): string[] {
-    let values: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        values.push(obj[prop]); // value
-    }
-    return values
-  }
-
-
   writeData(){
     var data={
-      name: "",
+      asset: "",
     }
 
-    data.name = this.name;
+    data.asset = this.name;
     console.log(data);
     this.showForm = false;
-    this._backend.writeFactoryData(data).subscribe(
+    this._backend.createAsset(data).subscribe(
         (data: Response) => {
-          console.log("User created Successfully");
+          console.log("Asset created Successfully");
         },
         error => {
-          console.log("user creation failed");
+          console.log("Asset creation failed");
         },
         () => console.log('User API Execution Completed')
     );

@@ -32,11 +32,11 @@ export class ManageActionsComponent implements OnInit {
   private getData() {
     this.resources = [];
     this.dataKeys = [];
-    return this._backend.readFactoryData().subscribe(
+    return this._backend.getActions().subscribe(
         (data: Response) => {
-          console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
-          this.resources = JSON.parse(data['_body']);
-          this.dataKeys = this.generateKeys(this.resources[0]);
+          console.log(JSON.parse(data['_body']).actions);
+          this.resources = JSON.parse(data['_body']).actions;
+          this.resources = this.resources.reverse();
           this.dataLoaded = true;
         },
         error => {
@@ -47,39 +47,20 @@ export class ManageActionsComponent implements OnInit {
     );
   }
 
-  generateKeys(obj): string[] {
-    let keys: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        keys.push(prop);
-    }
-    return keys;
-  }
-
-  getValues(obj): string[] {
-    let values: string[] = [];
-    for (var prop in obj) {
-      if (obj.hasOwnProperty(prop))
-        values.push(obj[prop]); // value
-    }
-    return values
-  }
-
-
   writeData(){
     var data={
-      name: "",
+      action: "",
     }
 
-    data.name = this.name;
+    data.action = this.name;
     console.log(data);
     this.showForm = false;
-    this._backend.writeFactoryData(data).subscribe(
+    this._backend.createAction(data).subscribe(
         (data: Response) => {
-          console.log("User created Successfully");
+          console.log("Action  created Successfully");
         },
         error => {
-          console.log("user creation failed");
+          console.log("Action creation failed");
         },
         () => console.log('User API Execution Completed')
     );
