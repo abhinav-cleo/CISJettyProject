@@ -42,6 +42,12 @@ export class UserComponentComponent implements OnInit {
     }
 
 
+    onChange(newValue) {
+        console.log(newValue);
+        this.selectedRole = newValue;
+        this.getData();
+    }
+
     private getData() {
         this.resources = [];
         this.dataKeys = [];

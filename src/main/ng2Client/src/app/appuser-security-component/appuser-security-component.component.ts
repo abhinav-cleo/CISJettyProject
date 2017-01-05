@@ -19,6 +19,8 @@ export class AppuserSecurityComponent implements OnInit {
     public permissionsFetched: boolean = false;
     public rolePermissions:any = [];
     public fetchedPermissions: any = [];
+    public allUserRoles: any = [];
+    public selectedRole: string = "admin";
 
     toggleUserForm() {
         this.showForm = !this.showForm;
@@ -35,8 +37,16 @@ export class AppuserSecurityComponent implements OnInit {
         this.permissionsFetched = false;
         this.rolePermissions = [];
         this.fetchedPermissions = [];
+        this.allUserRoles = [];
+        this.selectedRole = "admin";
     }
 
+
+    onChange(newValue) {
+        console.log(newValue);
+        this.selectedRole = newValue;
+        this.getData();
+    }
 
     private getData() {
         this.resources = [];
@@ -45,11 +55,11 @@ export class AppuserSecurityComponent implements OnInit {
             (data: Response) => {
                 this.resources = JSON.parse(data['_body']);
                 this.resources = this.resources.reverse();
-                this.dataLoaded = true;
+                this.getAllUserRoles();
             },
             error => {
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
-                this.dataLoaded = true;
+
             },
             () => {}
         );
@@ -67,6 +77,7 @@ export class AppuserSecurityComponent implements OnInit {
         this._backend.createUser(data).subscribe(
             (data: Response) => {
                 console.log("User created Successfully");
+                this.setRoleForUser();
             },
             error => {
                 console.log("user creation failed");
@@ -124,14 +135,49 @@ export class AppuserSecurityComponent implements OnInit {
         );
     }
 
+    getAllUserRoles(){
+        this._backend.getAllRoles().subscribe(
+            (data: Response) => {
+                console.log("user Role Fetched successfully");
+                this.allUserRoles = JSON.parse(data['_body']);
+                this.dataLoaded = true;
+            },
+            error => {
+                console.log("user Role Fetching failed");
+                this.allUserRoles = [];
+                this.dataLoaded = true;
+            },
+            () => {}
+        );
+    }
+
+    setRoleForUser(){
+        var param: any = {
+            user: "",
+            role: ""
+        };
+        param.user = this.username;
+        param.role = this.selectedRole;
+        this._backend.assignRoleToUser(param).subscribe(
+            (data: Response) => {
+                console.log("user Role Updated successfully ");
+            },
+            error => {
+                console.log("user Role update failed");
+            },
+            () => {}
+        );
+    }
+
     ngOnInit() {
         this.username = "";
         this.password = "";
         this.permissionsFetched = false;
         this.rolePermissions = [];
         this.fetchedPermissions = [];
+        this.allUserRoles = [];
+        this.selectedRole = "admin";
         this.getData();
     }
-
 
 }

@@ -26,6 +26,17 @@
                        [(ngModel)]="password">
             </div>
         </div>
+
+        <div class="form-group row">
+            <label for="example-email-input" class="col-xs-2 col-form-label">Select Role For User</label>
+            <div class="col-xs-10">
+                <select [ngModel]="selectedRole" (ngModelChange)="onChange($event)" name="sel2">
+                    <option [value]="i" *ngFor="let i of allUserRoles">{{i}}</option>
+                </select>
+            </div>
+
+        </div>
+
         <button type="submit" class="btn btn-primary" (click)="writeData();">Submit {{createNewComponent}}</button>
     </div>
     <br>
