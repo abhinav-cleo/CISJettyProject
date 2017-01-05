@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
     selector: 'dashboard',
     templateUrl: './dashboard.html'
 })
-export class Dashboard {
+export class DashboardComponent {
     public read: any;
     public resources: any[] = [];
     public dataLoaded: boolean = false;

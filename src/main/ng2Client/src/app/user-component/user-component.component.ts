@@ -81,15 +81,15 @@ export class UserComponentComponent implements OnInit {
         data.email = this.email;
         console.log(data);
         this.showForm = false;
-        // this._backend.writeFactoryData(data).subscribe(
-        //     (data: Response) => {
-        //         console.log("User created Successfully");
-        //     },
-        //     error => {
-        //         console.log("user creation failed");
-        //     },
-        //     () => console.log('User API Execution Completed')
-        // );
+        this._backend.writeFactoryData(data).subscribe(
+            (data: Response) => {
+                console.log("User created Successfully");
+            },
+            error => {
+                console.log("user creation failed");
+            },
+            () => console.log('User API Execution Completed')
+        );
     }
 
     ngOnInit() {

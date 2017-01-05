@@ -16,7 +16,7 @@ export class DashboardDataService {
 
     login(params) {
         return this.http
-            .post("http://localhost:8680/rest/cis/login", params)
+            .get("http://localhost:8680/rest/authService/login/"+ params.id+"/"+ params.password+"/")
             .map(response => {
                 return response
             });
@@ -38,6 +38,105 @@ export class DashboardDataService {
 
     authData() {
         return true
+    }
+
+    getUsers(){
+        var url = "http://localhost:8680/rest/authService/users"; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    createUser(param){
+        var url = "http://localhost:8680/rest/authService/createUser/"+param.user+"/"+param.password; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    removeUser(param){
+        var url = "http://localhost:8680/rest/authService/removeUser/"+param.user; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    getAllRoles(){
+        var url = "http://localhost:8680/rest/authService/roles"; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    getUserRoles(param){
+        var url = "http://localhost:8680/rest/authService/roles/"+param.user; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    getRolePermissions(param){
+        var url = "http://localhost:8680/rest/authService/permissions/"+param.role; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    createRole(param){
+        var url = "http://localhost:8680/rest/authService/addRole/"+param.role; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    deleteRole(param){
+        var url = "http://localhost:8680/rest/authService/deleteRole/"+param.role; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    removeRole(param){
+        var url = "http://localhost:8680/rest/authService/removeRole/"+param.role; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    assignRoleToUser(param){
+        var url = "http://localhost:8680/rest/authService/assignRole/"+param.user+"/"+param.role; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    assignActionPermissionsOnAssetToRole(param){
+        var url = "http://localhost:8680/rest/authService/addPermission/"+param.role+"/"+param.asset+"/"+param.action; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    createAsset(param){
+        var url = "http://localhost:8680/rest/authService/addAsset/"+param.asset; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    getAssets(){
+        var url = "http://localhost:8680/rest/authService/getAssets"; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
+    }
+
+    createAction(param){
+        var url = "http://localhost:8680/rest/authService/addAction/"+param.action; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
+            .map(response => response);
+    }
+
+    getActions(){
+        var url = "http://localhost:8680/rest/authService/getActions"; // TODO: dummy service, to be changed as per requirements
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(url))
+            .map(response => response);
     }
 
 }

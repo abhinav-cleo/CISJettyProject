@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Response} from "@angular/http";
+import {DashboardDataService} from "../dashboard-data.service";
 
 @Component({
   selector: 'app-application-security-component',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationSecurityComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(){
 
-  ngOnInit() {
+  }
+
+  ngOnInit(){
+
   }
 
 }

@@ -1,7 +1,6 @@
 ### Maven template
 target/
 .idea/
-src/main/resources/
 src/main/webapp/*.map
 src/main/webapp/*.html
 src/main/webapp/*.js

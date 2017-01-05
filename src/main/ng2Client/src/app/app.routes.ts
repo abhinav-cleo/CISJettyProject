@@ -3,20 +3,18 @@
  */
 import {ModuleWithProviders} from "@angular/core";
 import {Routes, RouterModule} from "@angular/router";
-import {Dashboard} from "./dashboard";
+import {DashboardComponent} from "./dashboard";
 import {LoginComponent} from "./login/login.component";
-import {MainComponentComponent} from "./main-component/main-component.component";
-import {AdminComponentComponent} from "./admin-component/admin-component.component";
+import {MainComponent} from "./main-component/main-component.component";
+import {AdminComponent} from "./admin-component/admin-component.component";
 import {UserComponentComponent} from "./user-component/user-component.component";
-import {DatasourceComponentComponent} from "./datasource-component/datasource-component.component";
-import {SchedulingComponentComponent} from "./scheduling-component/scheduling-component.component";
-import {SecurityComponentComponent} from "./security-component/security-component.component";
-import {AppuserSecurityComponentComponent} from "./appuser-security-component/appuser-security-component.component";
-import {UserrolesSecurityComponentComponent} from "./userroles-security-component/userroles-security-component.component";
-import {MenuoptionsSecurityComponentComponent} from "./menuoptions-security-component/menuoptions-security-component.component";
-import {AssignmenuoptionsSecurityComponentComponent} from "./assignmenuoptions-security-component/assignmenuoptions-security-component.component";
-import {ApplicationSecurityComponentComponent} from "./application-security-component/application-security-component.component";
-import {PasswordSecurityComponentComponent} from "./password-security-component/password-security-component.component";
+import {DatasourceComponent} from "./datasource-component/datasource-component.component";
+import {SchedulingComponent} from "./scheduling-component/scheduling-component.component";
+import {SecurityComponent} from "./security-component/security-component.component";
+import {AppuserSecurityComponent} from "./appuser-security-component/appuser-security-component.component";
+import {UserrolesSecurityComponent} from "./userroles-security-component/userroles-security-component.component";
+import {ManageActionsComponent} from "./manageactions-component/menuoptions-security-component.component";
+import {ManageAssetsComponent} from "./manageassets-component/assignmenuoptions-security-component.component";
 
 export const routes: Routes = [
     {
@@ -30,51 +28,43 @@ export const routes: Routes = [
     },
     {
         path: 'main',
-        component:MainComponentComponent,
+        component:MainComponent,
         children:[
             {
                 path: 'admin',
-                component:AdminComponentComponent,
+                component:AdminComponent,
                 children: [
                     {
                         path: 'datasource',
-                        component: DatasourceComponentComponent
+                        component: DatasourceComponent
                     },
                     {
                         path: 'scheduling',
-                        component: SchedulingComponentComponent
+                        component: SchedulingComponent
                     },
                     {
                         path: 'security',
-                        component: SecurityComponentComponent,
+                        component: SecurityComponent,
                         children: [
                             {
                                 path: 'dashboard',
-                                component: Dashboard
+                                component: DashboardComponent
                             },
                             {
                                 path: 'manageapplicationusers',
-                                component: AppuserSecurityComponentComponent
+                                component: AppuserSecurityComponent
                             },
                             {
                                 path: 'assignuserroles',
-                                component: UserrolesSecurityComponentComponent
+                                component: UserrolesSecurityComponent
                             },
                             {
-                                path: 'managemenuoptions',
-                                component: MenuoptionsSecurityComponentComponent
+                                path: 'manageactions',
+                                component: ManageActionsComponent
                             },
                             {
-                                path: 'assignmenuoptionstoroles',
-                                component: AssignmenuoptionsSecurityComponentComponent
-                            },
-                            {
-                                path: 'manageapplicationsecurity',
-                                component: ApplicationSecurityComponentComponent
-                            },
-                            {
-                                path: 'managepasswords',
-                                component: PasswordSecurityComponentComponent
+                                path: 'manageassets',
+                                component: ManageAssetsComponent
                             }
                         ]
                     }

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { UserrolesSecurityComponentComponent } from './userroles-security-component.component';
+import { UserrolesSecurityComponent } from './userroles-security-component.component';
 
-describe('UserrolesSecurityComponentComponent', () => {
-  let component: UserrolesSecurityComponentComponent;
-  let fixture: ComponentFixture<UserrolesSecurityComponentComponent>;
+describe('UserrolesSecurityComponent', () => {
+  let component: UserrolesSecurityComponent;
+  let fixture: ComponentFixture<UserrolesSecurityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserrolesSecurityComponentComponent ]
+      declarations: [ UserrolesSecurityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserrolesSecurityComponentComponent);
+    fixture = TestBed.createComponent(UserrolesSecurityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
