@@ -67,9 +67,8 @@ export class DashboardDataService {
     }
 
     getUserRoles(param){
-        var url = "http://localhost:8680/rest/authService/roles/"+param.user; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
-            .switchMap(() => this.http.get(url))
+        var url = "http://localhost:8680/rest/authService/roles/"+param; // TODO: dummy service, to be changed as per requirements
+        return this.http.get(url)
             .map(response => response);
     }
 
