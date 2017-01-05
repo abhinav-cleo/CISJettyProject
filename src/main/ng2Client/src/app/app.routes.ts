@@ -15,6 +15,7 @@ import {AppuserSecurityComponent} from "./appuser-security-component/appuser-sec
 import {UserrolesSecurityComponent} from "./userroles-security-component/userroles-security-component.component";
 import {ManageActionsComponent} from "./manageactions-component/menuoptions-security-component.component";
 import {ManageAssetsComponent} from "./manageassets-component/assignmenuoptions-security-component.component";
+import {PasswordSecurityComponentComponent} from "./password-security-component/password-security-component.component";
 
 export const routes: Routes = [
     {
@@ -65,6 +66,10 @@ export const routes: Routes = [
                             {
                                 path: 'manageassets',
                                 component: ManageAssetsComponent
+                            },
+                            {
+                                path: "assignuserpermissions",
+                                component:PasswordSecurityComponentComponent
                             }
                         ]
                     }

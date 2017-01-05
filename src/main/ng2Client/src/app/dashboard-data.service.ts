@@ -9,7 +9,7 @@ export class DashboardDataService {
     }
 
     readData(param) {
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(param))
             .map(response => response);
     }
@@ -24,14 +24,14 @@ export class DashboardDataService {
 
     readFactoryData() {
         var url = "https://api.github.com/users"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(url))
             .map(response => response);
     }
 
     writeFactoryData(data) {
         var url = "http://localhost:8680/rest/cis/writedata"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.post(url,data))
             .map(response => response);
     }
@@ -42,7 +42,7 @@ export class DashboardDataService {
 
     getUsers(){
         var url = "http://localhost:8680/rest/authService/users"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(url))
             .map(response => response);
     }
@@ -61,7 +61,7 @@ export class DashboardDataService {
 
     getAllRoles(){
         var url = "http://localhost:8680/rest/authService/roles"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(url))
             .map(response => response);
     }
@@ -117,7 +117,7 @@ export class DashboardDataService {
 
     getAssets(){
         var url = "http://localhost:8680/rest/authService/getAssets"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(url))
             .map(response => response);
     }
@@ -130,7 +130,7 @@ export class DashboardDataService {
 
     getActions(){
         var url = "http://localhost:8680/rest/authService/getActions"; // TODO: dummy service, to be changed as per requirements
-        return Observable.interval(5000)
+        return Observable.interval(2000)
             .switchMap(() => this.http.get(url))
             .map(response => response);
     }
