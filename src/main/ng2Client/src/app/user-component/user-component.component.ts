@@ -27,6 +27,8 @@ export class UserComponentComponent implements OnInit {
     constructor(private _backend: DashboardDataService) {
         this.componentTitle = "CIS Users Management";
         this.createNewComponent = "New User";
+        this.username = "";
+        this.password = "";
     }
 
 
@@ -70,6 +72,8 @@ export class UserComponentComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.username = "";
+        this.password = "";
         this.getData();
     }
 

@@ -28,6 +28,8 @@ export class AppuserSecurityComponent implements OnInit {
     constructor(private _backend: DashboardDataService) {
         this.componentTitle = "CIS Application Users Management";
         this.createNewComponent = "New Application User";
+        this.username = "";
+        this.password = "";
     }
 
 
@@ -71,6 +73,8 @@ export class AppuserSecurityComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.username = "";
+        this.password = "";
         this.getData();
     }
 

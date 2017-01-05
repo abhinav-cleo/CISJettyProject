@@ -24,6 +24,7 @@ export class ManageAssetsComponent implements OnInit {
   }
 
   constructor(private _backend: DashboardDataService) {
+    this.dataLoaded = false;
     this.componentTitle = "CIS Assets Management";
     this.createNewComponent = "New CIS Asset";
   }
@@ -66,6 +67,7 @@ export class ManageAssetsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataLoaded = false;
     this.getData();
   }
 
