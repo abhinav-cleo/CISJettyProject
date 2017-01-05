@@ -38,6 +38,7 @@ import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.dynamodbv2.model.TableDescription;
 import com.amazonaws.services.dynamodbv2.util.TableUtils;
+import com.cleo.cis.server.AWS.AWSUtils;
 
 /**
  * This sample demonstrates how to perform a few simple operations with the
@@ -77,33 +78,13 @@ public class AmazonDynamoDBSample {
          * credential profile by reading from the credentials file located at
          * (~/.aws/credentials).
          */
-    AWSCredentials credentials = null;
-    try {
-      credentials = new AWSCredentials() {
-
-        @Override
-        public String getAWSSecretKey() {
-          // TODO Auto-generated method stub
-          return "9Jd1dG/7QvMuK3YbIDOiHvz8Ubh2+AMWmaghfjqZ";
-        }
-
-        @Override
-        public String getAWSAccessKeyId() {
-          // TODO Auto-generated method stub
-          return "AKIAJF67V6PNE7IUXF3A";
-        }
-      };
-    } catch (Exception e) {
-      throw new AmazonClientException(
-              "Cannot load the credentials from the credential profiles file. " +
-                      "Please make sure that your credentials file is at the correct " +
-                      "location (~/.aws/credentials), and is in valid format.",
-              e);
-    }
+    AWSCredentials credentials = AWSUtils.getCredentials();
     dynamoDB = new AmazonDynamoDBClient(credentials);
     Region usWest2 = Region.getRegion(Regions.US_WEST_2);
     dynamoDB.setRegion(usWest2);
   }
+
+
 
   public static void main(String[] args) throws Exception {
     init();
