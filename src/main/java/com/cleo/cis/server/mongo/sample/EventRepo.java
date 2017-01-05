@@ -66,8 +66,6 @@ public class EventRepo {
 
       System.out.println("Done");
 
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
     } catch (MongoException e) {
       e.printStackTrace();
     }

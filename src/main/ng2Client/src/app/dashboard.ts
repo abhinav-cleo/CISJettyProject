@@ -11,7 +11,7 @@ export class DashboardComponent {
     public dataLoaded: boolean = false;
     public dataKeys: string[] = [];
     public tableName: string = "STOCK";
-    devices = ['Stock', 'VlTransfers', 'test'];
+    devices = ['Stock', 'VlTransfers', 'test', 'EventsTable'];
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService) {
         this.dataLoaded = false;
@@ -31,8 +31,9 @@ export class DashboardComponent {
     private getData() {
         var dbResources  = {
             Stock: "http://localhost:8680/rest/cis/info?table=",
-            VlTransfers: "http://10.20.101.250:8680/rest/transfers/data?table=",
-            MongoDB: "http://localhost:8680/rest/mongoTransfers/data?table="
+            VlTransfers: "http://localhost:8680/rest/transfers/data?table=",
+            MongoDB: "http://localhost:8680/rest/mongoTransfers/data?table=",
+            DynamoDB : "http://localhost:8060/rest/awsService/getEventsFromDB"
         }
         this.resources = [];
         this.dataKeys = [];

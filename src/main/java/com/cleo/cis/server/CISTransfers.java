@@ -43,7 +43,7 @@ public class CISTransfers {
         try {
             Class.forName(Driver.class.getName()).newInstance();
             //Get a connection
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/versalexTest", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://10.20.101.232:3306/versalexTest", "root", "root");
             stmt = conn.createStatement();
         } catch (Exception except) {
             except.printStackTrace();
