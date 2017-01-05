@@ -4,6 +4,7 @@ import com.cleo.cis.server.auth.common.AuthException;
 import com.cleo.cis.server.auth.common.AuthUtils;
 import com.cleo.cis.server.auth.perm.ActionsRepo;
 import com.cleo.cis.server.auth.perm.AssetRepo;
+import com.cleo.cis.server.auth.stormpath.StormPathProvider;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.SecurityUtils;
@@ -39,6 +40,18 @@ public class ShirosProvider {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
+    System.out.println("\n\n loading the users from storm database.");
+    JSONArray userAccounts = StormPathProvider.getUserAccounts();
+    for(int i=0;i<userAccounts.length();i++) {
+      String useremail = userAccounts.get(0).toString();
+      try {
+        addUser(useremail,"Welcome@2");
+      } catch (IOException e) {
+        e.printStackTrace();
+      } catch (AuthException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public static boolean loginUser(String userName, String password) throws AuthException {
@@ -53,7 +66,7 @@ public class ShirosProvider {
   public static boolean addUser(String userName, String password) throws IOException, AuthException {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
-    section.put(userName, password);
+    section.put(userName, "Welcome@2");
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
     return true;
@@ -174,7 +187,7 @@ public class ShirosProvider {
   }
 
   private static void authenticateUser(Subject currentUser, String userName, String password) throws AuthException {
-      UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+      UsernamePasswordToken token = new UsernamePasswordToken(userName, "Welcome@2");
       token.setRememberMe(false);
       try {
         currentUser.login(token);
@@ -258,9 +271,6 @@ public class ShirosProvider {
 
 
   public static void main(String[] args) {
-    JSONArray json = new JSONArray();
-    json.put("test");
-    json.put("tes2");
-    System.out.println(json.toString());
+    JSONArray users = getUsers();
   }
 }

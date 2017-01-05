@@ -4,6 +4,7 @@ import com.cleo.cis.server.auth.common.AuthException;
 import com.cleo.cis.server.auth.perm.ActionsRepo;
 import com.cleo.cis.server.auth.perm.AssetRepo;
 import com.cleo.cis.server.auth.shiros.ShirosProvider;
+import com.cleo.cis.server.auth.stormpath.StormPathProvider;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -82,6 +83,7 @@ public class AuthService {
     responseJSON.put("message","user created successfully.");
     try {
       ShirosProvider.addUser(userName, password);
+      StormPathProvider.createUserAccount(userName,password);
     }catch ( Exception ex) {
       ex.printStackTrace();
       responseJSON = new JSONObject();
