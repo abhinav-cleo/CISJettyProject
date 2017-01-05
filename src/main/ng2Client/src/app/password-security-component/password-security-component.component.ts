@@ -100,10 +100,11 @@ export class PasswordSecurityComponentComponent implements OnInit {
         this.showForm = false;
         this._backend.assignActionPermissionsOnAssetToRole(data).subscribe(
             (data: Response) => {
-                console.log("User Role Successfully");
+                console.log("Permissions for Actions over Assets is successfully assigned to Roles");
+                this.getData();
             },
             error => {
-                console.log("user Role failed");
+                console.log("Permissions for Actions over Assets is Failed");
             },
             () => console.log('User API Execution Completed')
         );

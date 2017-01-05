@@ -72,6 +72,7 @@ export class UserrolesSecurityComponent implements OnInit {
         this._backend.createRole(data).subscribe(
             (data: Response) => {
                 console.log("User Role Successfully");
+                this.getData();
             },
             error => {
                 console.log("user Role failed");
@@ -85,6 +86,7 @@ export class UserrolesSecurityComponent implements OnInit {
         this._backend.removeRole(param).subscribe(
             (data: Response) => {
                 console.log("User Role Removed Successfully");
+                this.getData();
             },
             error => {
                 console.log("user Role Removal failed");
@@ -98,6 +100,7 @@ export class UserrolesSecurityComponent implements OnInit {
         this._backend.deleteRole(param).subscribe(
             (data: Response) => {
                 console.log("User Role Removed Successfully");
+                this.getData();
             },
             error => {
                 console.log("user Role Removal failed");

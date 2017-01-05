@@ -59,6 +59,7 @@ export class ManageActionsComponent implements OnInit {
         this._backend.createAction(data).subscribe(
             (data: Response) => {
                 console.log("Action  created Successfully");
+                this.getData();
             },
             error => {
                 console.log("Action creation failed");

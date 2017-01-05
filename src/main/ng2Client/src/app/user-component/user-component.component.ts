@@ -8,6 +8,7 @@ import {Response} from "@angular/http";
     styleUrls: ['./user-component.component.css']
 })
 export class UserComponentComponent implements OnInit {
+
     public componentTitle: string = "";
     public createNewComponent = "";
     public resources: any[] = [];
@@ -45,7 +46,6 @@ export class UserComponentComponent implements OnInit {
     onChange(newValue) {
         console.log(newValue);
         this.selectedRole = newValue;
-        this.getData();
     }
 
     private getData() {
@@ -92,6 +92,7 @@ export class UserComponentComponent implements OnInit {
         this._backend.removeUser(param).subscribe(
             (data: Response) => {
                 console.log("User Removed Successfully");
+                this.getData();
             },
             error => {
                 console.log("user Removal failed");
@@ -161,6 +162,7 @@ export class UserComponentComponent implements OnInit {
         this._backend.assignRoleToUser(param).subscribe(
             (data: Response) => {
                 console.log("user Role Updated successfully ");
+                this.getData();
             },
             error => {
                 console.log("user Role update failed");
@@ -179,5 +181,4 @@ export class UserComponentComponent implements OnInit {
         this.selectedRole = "admin";
         this.getData();
     }
-
 }

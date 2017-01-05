@@ -70,7 +70,6 @@
                     <strong>User Actions</strong>
                 </td>
             </tr>
-
             </thead>
             <tbody>
             <tr *ngFor="let count of resources; let i = index" data-qa="transfer-row" [attr.data-index]="i">
@@ -84,7 +83,7 @@
                   <button (click)="userRemove(count)"><i class="fa fa-eraser"
                                                          aria-hidden="true"></i> Remove User</button>
               </span>
-              <span>
+                    <span>
                   <button (click)="fetchUserRoles(count)"><i class="fa fa-envelope-open" aria-hidden="true"></i> Get User Roles</button>
               </span>
                 </td>
