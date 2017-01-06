@@ -12,14 +12,19 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
 public class AWSSQSConsumer {
+  
+  public static boolean started = false;
 
   SQSConnection connection = null;
   Session session = null;
+ 
   
-  public void start() throws JMSException, InterruptedException {
+  public static void start() throws JMSException, InterruptedException {
+    if(started)return;
+    started = true;
     SQSConnectionFactory connectionFactory = SQSConnectionFactory.builder()
         .withRegion(Region.getRegion(Regions.US_WEST_2))
-        .withAWSCredentialsProvider(new DefaultCredentialsProvider())
+        .withAWSCredentialsProvider(new  DefaultCredentialsProvider())
         .build();
 
     System.out.println(" Created ConnectionFactory");
@@ -37,7 +42,7 @@ public class AWSSQSConsumer {
 
     // Start receiving incoming messages.
     connection.start();
-    
+    Thread.sleep(1000);
     System.out.println("Startinng Listening for messaegs...");
   }
   
@@ -51,6 +56,7 @@ public class AWSSQSConsumer {
   }
 
   public static void main(String[] args) throws JMSException, InterruptedException {
+    System.out.println(System.getProperty("AWS_ACCESS_KEY_ID"));
     AWSSQSConsumer awssqsConsumer = new AWSSQSConsumer();
     awssqsConsumer.start();
     Thread.sleep(60000);

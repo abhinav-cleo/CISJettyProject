@@ -5,6 +5,8 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
+import com.cleo.cis.server.AWS.DB.AWSDynamoClient;
+
 public class AWSMessageListener implements MessageListener {
   @Override
   public void onMessage(Message message) {
@@ -12,10 +14,14 @@ public class AWSMessageListener implements MessageListener {
     try {
       // Cast the received message as TextMessage and print the text to screen.
       if (message != null) {
+        AWSDynamoClient.addEventToTable(((TextMessage) message).getText());
+
         System.out.println("Received: " + ((TextMessage) message).getText());
       }
+      
+      
       message.acknowledge();
-    } catch (JMSException e) {
+    } catch (JMSException | InterruptedException e) {
       e.printStackTrace();
     }
   }

@@ -9,17 +9,19 @@ import javax.jms.TextMessage;
 import com.amazon.sqs.javamessaging.AmazonSQSMessagingClientWrapper;
 import com.amazon.sqs.javamessaging.SQSConnection;
 import com.amazon.sqs.javamessaging.SQSConnectionFactory;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
+import com.cleo.cis.server.services.AWSService;
 
 public class AWSSQSProducer {
   
-  public void sendMessage(String msg) throws JMSException {
+  public static void sendMessage(String msg) throws JMSException {
 
     //Create the connection to the AWS
     SQSConnectionFactory connectionFactory = SQSConnectionFactory.builder()
         .withRegion(Region.getRegion(Regions.US_WEST_2))
-        .withAWSCredentialsProvider(new DefaultCredentialsProvider())
+        .withAWSCredentialsProvider(new  DefaultCredentialsProvider())
         .build();
 
     System.out.println("Created connectionFactory");
@@ -45,8 +47,9 @@ public class AWSSQSProducer {
     connection.close();
   }
   
-  public static void main(String args[]) throws JMSException {
-    AWSSQSProducer producer = new AWSSQSProducer();
-    producer.sendMessage("Test Mohan12345");
+  public static void main(String args[]) throws JMSException, InterruptedException {
+//    AWSSQSProducer producer = new AWSSQSProducer();
+//    producer.sendMessage("Test Mohan12345");
+    new AWSService().sendMessage("{'name':'testing'"+System.currentTimeMillis()+"}");
   }
 }
