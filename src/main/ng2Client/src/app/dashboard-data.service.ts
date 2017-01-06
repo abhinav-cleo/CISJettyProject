@@ -6,7 +6,8 @@ import {Observable} from "rxjs";
 export class DashboardDataService {
     public base_url = "";
     constructor(private http: Http) {
-        this.base_url = "http://localhost:8680";
+        //this.base_url = "http://localhost:8680";
+        this.base_url = "http://ec2-35-166-90-134.us-west-2.compute.amazonaws.com:8680";
     }
 
     readData(param) {
