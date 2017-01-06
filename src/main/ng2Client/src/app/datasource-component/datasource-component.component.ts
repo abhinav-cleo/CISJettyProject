@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
   selector: 'app-datasource-component',
@@ -25,7 +26,7 @@ export class DatasourceComponent implements OnInit {
     return this.showForm;
   }
 
-  constructor(private _backend: DashboardDataService) {
+  constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
     this.componentTitle = "CIS DataSource Management";
     this.createNewComponent = "New CIS DataSource";
   }
@@ -39,10 +40,12 @@ export class DatasourceComponent implements OnInit {
           console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
           this.resources = JSON.parse(data['_body']);
           this.dataKeys = this.generateKeys(this.resources[0]);
+          this.alertService.success("DataSource Fetched Successfully");
           this.dataLoaded = true;
         },
         error => {
-          console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
+          this.alertService.error("DataSource Fetching Failed");
+          console.log('Data reading to the API failed');
           this.dataLoaded = true;
         },
         () => console.log('Reading Data complete')
@@ -80,10 +83,12 @@ export class DatasourceComponent implements OnInit {
     this.showForm = false;
     this._backend.writeFactoryData(data).subscribe(
         (data: Response) => {
-            console.log("User created Successfully");
+          this.alertService.success("DataSource Created Successfully");
+            console.log("DataSource created Successfully");
         },
         error => {
-            console.log("user creation failed");
+          this.alertService.error("DataSource Creation Successfully");
+            console.log("Datasource creation failed");
         },
         () => console.log('User API Execution Completed')
     );

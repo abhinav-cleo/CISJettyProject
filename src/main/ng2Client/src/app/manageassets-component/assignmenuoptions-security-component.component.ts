@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
     selector: 'app-assignmenuoptions-security-component',
@@ -23,7 +24,7 @@ export class ManageAssetsComponent implements OnInit {
         return this.showForm;
     }
 
-    constructor(private _backend: DashboardDataService) {
+    constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.dataLoaded = false;
         this.componentTitle = "CIS Assets Management";
         this.createNewComponent = "New CIS Asset";
@@ -38,8 +39,10 @@ export class ManageAssetsComponent implements OnInit {
                 this.resources = JSON.parse(data['_body']).assets;
                 this.resources = this.resources.reverse();
                 this.dataLoaded = true;
+                this.alertService.success("User Asset Created Successfully");
             },
             error => {
+                this.alertService.error("Error in creating User Asset");
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
                 this.dataLoaded = true;
             },
@@ -57,10 +60,12 @@ export class ManageAssetsComponent implements OnInit {
         this.showForm = false;
         this._backend.createAsset(data).subscribe(
             (data: Response) => {
+                this.alertService.success("Asset created Successfully");
                 console.log("Asset created Successfully");
                 this.getData();
             },
             error => {
+                this.alertService.error("Asset creation failed");
                 console.log("Asset creation failed");
             },
             () => console.log('User API Execution Completed')

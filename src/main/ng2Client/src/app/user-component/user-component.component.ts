@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardDataService} from "../dashboard-data.service";
 import {Response} from "@angular/http";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
     selector: 'app-user-component',
@@ -30,7 +31,7 @@ export class UserComponentComponent implements OnInit {
         return this.showForm;
     }
 
-    constructor(private _backend: DashboardDataService) {
+    constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.componentTitle = "CIS Users Management";
         this.createNewComponent = "New User";
         this.username = "";
@@ -55,10 +56,12 @@ export class UserComponentComponent implements OnInit {
             (data: Response) => {
                 this.resources = JSON.parse(data['_body']);
                 this.resources = this.resources.reverse();
+                this.alertService.success("All Users are Fetched Successfully");
                 this.getAllUserRoles();
             },
             error => {
-                console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
+                this.alertService.error("All Users Fetching Failed");
+                console.log('Data reading to the API failed');
 
             },
             () => {}
@@ -76,10 +79,12 @@ export class UserComponentComponent implements OnInit {
         this.showForm = false;
         this._backend.createUser(data).subscribe(
             (data: Response) => {
+                this.alertService.success("User created Successfully")
                 console.log("User created Successfully");
                 this.setRoleForUser();
             },
             error => {
+                this.alertService.success("user creation failed");
                 console.log("user creation failed");
             },
             () => console.log('User API Execution Completed')

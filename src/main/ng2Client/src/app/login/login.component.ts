@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   private user: string;
   private password: string;
 
-  constructor(private router: Router, private _backend: DashboardDataService) { }
+  constructor(private router: Router, private _backend: DashboardDataService, private alertService: AlertServiceService) { }
 
   ngOnInit() {
   }
@@ -26,13 +27,16 @@ export class LoginComponent implements OnInit {
         this._backend.login(params).subscribe(
             (data:Response) => {
                 if(data){
+                    this.alertService.success("Logged In Successfully");
                   this.router.navigate(['/main']);
                 }
                 else {
+                    this.alertService.error("Login Failed");
                     this.router.navigate(['/login']);
                 }
             },
             error => {
+                this.alertService.error("Login Failed");
                 this.router.navigate(['/login']);
             },
             () => console.log('Logging in Complete')

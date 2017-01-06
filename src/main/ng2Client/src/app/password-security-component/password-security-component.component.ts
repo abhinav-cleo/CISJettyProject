@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
     selector: 'app-password-security-component',
@@ -32,7 +33,7 @@ export class PasswordSecurityComponentComponent implements OnInit {
         return this.showForm;
     }
 
-    constructor(private _backend: DashboardDataService) {
+    constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.componentTitle = "CIS User Permissions Management";
         this.createNewComponent = "New CIS User Permissions";
         this.permissionsFetched = false;
@@ -71,8 +72,10 @@ export class PasswordSecurityComponentComponent implements OnInit {
                 this.resources = JSON.parse(data['_body']);
                 this.resources = this.resources.reverse();
                 this.getAllUserRoles();
+                this.alertService.success("All User Roles Fetched Successfully");
             },
             error => {
+                this.alertService.success("All User Roles fetching failed");
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
             },
             () => console.log('Reading Data complete')
@@ -100,10 +103,12 @@ export class PasswordSecurityComponentComponent implements OnInit {
         this.showForm = false;
         this._backend.assignActionPermissionsOnAssetToRole(data).subscribe(
             (data: Response) => {
+                this.alertService.success("Permissions for Actions over Assets is successfully assigned to Roles");
                 console.log("Permissions for Actions over Assets is successfully assigned to Roles");
                 this.getData();
             },
             error => {
+                this.alertService.error("Permissions for Actions over Assets is Failed");
                 console.log("Permissions for Actions over Assets is Failed");
             },
             () => console.log('User API Execution Completed')
