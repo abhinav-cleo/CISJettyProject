@@ -74,18 +74,18 @@ public class AWSDynamoClient {
         List<Map<String, AttributeValue>> items = scanResult.getItems();
         JSONArray jsonArray = new JSONArray();
         for (Map<String, AttributeValue> item : items) {
+            JSONObject jsonObject = new JSONObject();
+            jsonArray.put(jsonObject);
             Set<Map.Entry<String, AttributeValue>> entries = item.entrySet();
             for (Map.Entry<String, AttributeValue> entry : entries) {
-                JSONObject jsonObject = new JSONObject();
                 jsonObject.put(entry.getKey(), entry.getValue().getS());
-                jsonArray.put(jsonObject);
             }
         }
         return jsonArray;
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String data = "{'type':'FileCreatedTrigger','triggerId':'0ea2dafc-4c65-4f68-b096-d293751ec99b',\n" +
+        String data = "{'name':'EventID_"+System.currentTimeMillis()+"','type':'FileCreatedTrigger','triggerId':'0ea2dafc-4c65-4f68-b096-d293751ec99b',\n" +
                 "'actionId':'KHhk2cy5ScaAc7vCr4ZHnA','status':'SUCCESS'}";
         JSONObject jsonObject = new JSONObject(data);
         addEventToTable(jsonObject.toString());
