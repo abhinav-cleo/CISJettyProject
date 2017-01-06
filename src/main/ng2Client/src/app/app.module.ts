@@ -22,6 +22,8 @@ import { ManageActionsComponent } from './manageactions-component/menuoptions-se
 import { ManageAssetsComponent } from './manageassets-component/assignmenuoptions-security-component.component';
 import { ApplicationSecurityComponentComponent } from './application-security-component/application-security-component.component';
 import { PasswordSecurityComponentComponent } from './password-security-component/password-security-component.component';
+import { AlertComponentComponent } from './alert-component/alert-component.component';
+import {AlertServiceService} from "./alert-service.service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,6 +42,7 @@ import { PasswordSecurityComponentComponent } from './password-security-componen
         ManageAssetsComponent,
         ApplicationSecurityComponentComponent,
         PasswordSecurityComponentComponent,
+        AlertComponentComponent,
     ],
     imports: [
         BrowserModule,
@@ -51,7 +54,8 @@ import { PasswordSecurityComponentComponent } from './password-security-componen
     providers: [
         DashboardDataService,
         LoginRouteGuardComponent,
-        RouterOutletMap
+        RouterOutletMap,
+        AlertServiceService
     ],
     bootstrap: [AppComponent]
 })

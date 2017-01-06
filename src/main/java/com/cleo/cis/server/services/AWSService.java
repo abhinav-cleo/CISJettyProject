@@ -60,17 +60,12 @@ public class AWSService {
     @Path("/getEventsFromDB")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEventsFromDB(@QueryParam("table") String tableName) throws AuthException {
-        if (ShirosProvider.loggedInUser == null) {
-            System.out.println("\n\n\n\n ------- user is null  login first");
-            return Response.status(Response.Status.NOT_FOUND).entity("User is not logged in.")
-                    .header("Access-Control-Allow-Origin", "*")
-                    .header("Access-Control-Allow-Methods", "*")
-                    .build();
-        }
+        String permission = AssetRepo.reportAsset + ":" + ActionsRepo.view;
 
         Subject curentUser = ShirosProvider.loginUser(ShirosProvider.loggedInUser, "Welcome@2");
 
-        if (!curentUser.isPermitted(AssetRepo.reportAsset + ":" + ActionsRepo.view)) {
+
+        if (!curentUser.isPermitted(permission)) {
             System.out.println("\n\n\n - -Permissions not possible for the user  " + curentUser.getPrincipal());
             return Response.status(Response.Status.NOT_FOUND).entity("User is not allowed to view this resource." + curentUser.getPrincipal().toString())
                     .header("Access-Control-Allow-Origin", "*")

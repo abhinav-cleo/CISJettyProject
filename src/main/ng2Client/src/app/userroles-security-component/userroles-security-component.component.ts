@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardDataService} from "../dashboard-data.service";
 import {Response} from "@angular/http";
+import {AlertServiceService} from "../alert-service.service";
 
 @Component({
     selector: 'app-userroles-security-component',
@@ -25,7 +26,7 @@ export class UserrolesSecurityComponent implements OnInit {
         return this.showForm;
     }
 
-    constructor(private _backend: DashboardDataService) {
+    constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.componentTitle = "CIS User Roles Management";
         this.createNewComponent = "New CIS User Role";
         this.permissionsFetched = false;
@@ -44,8 +45,10 @@ export class UserrolesSecurityComponent implements OnInit {
                 this.resources = JSON.parse(data['_body']);
                 this.resources = this.resources.reverse();
                 this.dataLoaded = true;
+                this.alertService.success("User Roles are fetched Successfully");
             },
             error => {
+                this.alertService.success("User Roles are fetching failed");
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
                 this.dataLoaded = true;
             },
@@ -71,10 +74,12 @@ export class UserrolesSecurityComponent implements OnInit {
         this.showForm = false;
         this._backend.createRole(data).subscribe(
             (data: Response) => {
+                this.alertService.success("User Role created  Successfully");
                 console.log("User Role Successfully");
                 this.getData();
             },
             error => {
+                this.alertService.error("user Roles creation failed");
                 console.log("user Role failed");
             },
             () => console.log('User API Execution Completed')
