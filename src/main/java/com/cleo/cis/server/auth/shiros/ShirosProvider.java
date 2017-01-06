@@ -48,7 +48,12 @@ public class ShirosProvider {
       String userName = userAccounts.get(i).toString();
       try {
         System.out.println("\n\n adding user account ." + userName);
-        addUser(userName,"Welcome@2");
+        Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
+        String roles = section.get(userName);
+        if(roles == null) {
+          continue;
+        }
+        addUserWithRoles(userName,roles);
       } catch (IOException e) {
         e.printStackTrace();
       } catch (AuthException e) {
@@ -69,6 +74,15 @@ public class ShirosProvider {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
     section.put(userName, "Welcome@2");
+    sm.setRealm(new IniRealm(ini));
+    SecurityUtils.setSecurityManager(sm);
+    return true;
+  }
+
+  public static boolean addUserWithRoles(String userName, String rolesInfo) throws IOException, AuthException {
+    DefaultSecurityManager sm = new DefaultSecurityManager();
+    Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
+    section.put(userName, rolesInfo);
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
     return true;
@@ -274,7 +288,10 @@ public class ShirosProvider {
   }
 
 
-  public static void main(String[] args) {
-    JSONArray users = getUsers();
+  public static void main(String[] args) throws AuthException {
+    JSONArray reportUser = getRoles("reportUser");
+    Subject subject = loginUser("reportUser", "test");
+    subject.isPermitted("Report:View");
+    System.out.println(reportUser);
   }
 }
