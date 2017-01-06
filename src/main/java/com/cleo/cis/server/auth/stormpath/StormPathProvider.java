@@ -38,7 +38,7 @@ public class StormPathProvider {
 
   public static void main(String[] args) {
 //    useJava();
-    getUserAccounts();
+    createUserAccount("viewUser","Welcome@2");
   }
 
   public static Account createUserAccount(String userName, String password) {
