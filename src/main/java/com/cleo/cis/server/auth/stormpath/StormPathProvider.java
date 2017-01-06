@@ -47,6 +47,15 @@ public class StormPathProvider {
     return createUserAccount(client, application,userName,password);
   }
 
+  public static Account deleteUserAccount(String userName, String password) {
+    Client client = createStormClient();
+    Application application = getApplication(client);
+    Map queryParams = new HashMap<>();
+    AccountList accounts = application.getAccounts(queryParams);
+    return null;
+
+  }
+
   public static JSONArray getUserAccounts() {
     Client client = createStormClient();
     Application application = getApplication(client);

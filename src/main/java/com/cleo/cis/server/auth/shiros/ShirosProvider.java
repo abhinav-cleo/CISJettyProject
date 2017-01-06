@@ -33,7 +33,7 @@ public class ShirosProvider {
 
   private static String CONFIG_USER_FIND_LINE = "repalcementUser=replacementPassword";
 
-  public static Subject loggedInUser;
+  public static String loggedInUser;
 
   static IniSecurityManagerFactory factory = new IniSecurityManagerFactory("classpath:shiros.ini");
   static Ini ini = factory.getIni();
@@ -57,13 +57,12 @@ public class ShirosProvider {
     }
   }
 
-  public static boolean loginUser(String userName, String password) throws AuthException {
+  public static Subject loginUser(String userName, String password) throws AuthException {
     Subject currentUser = SecurityUtils.getSubject();
     System.out.println("user = " + userName);
     System.out.println("passwpord = " + password);
     authenticateUser(currentUser,userName,password);
-    currentUser.logout();
-    return true;
+    return currentUser;
   }
 
   public static boolean addUser(String userName, String password) throws IOException, AuthException {
@@ -194,7 +193,8 @@ public class ShirosProvider {
       token.setRememberMe(false);
       try {
         currentUser.login(token);
-        loggedInUser = currentUser;
+        loggedInUser = userName;
+        System.out.println("setting current userName to " + loggedInUser);
       } catch (UnknownAccountException uae) {
         throw new AuthException("There is no user with username of " + token.getPrincipal());
       } catch (IncorrectCredentialsException ice) {

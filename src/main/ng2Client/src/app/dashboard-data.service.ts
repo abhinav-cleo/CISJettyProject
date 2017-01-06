@@ -10,8 +10,8 @@ export class DashboardDataService {
     }
 
     readData(param) {
-        return Observable.interval(5000)
-            .switchMap(() => this.http.get(param));
+        return this.http.get(param)
+            .map(response => response);
     }
 
     login(params) {
