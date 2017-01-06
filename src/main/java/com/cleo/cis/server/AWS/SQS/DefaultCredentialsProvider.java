@@ -3,8 +3,6 @@ package com.cleo.cis.server.AWS.SQS;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
 public class DefaultCredentialsProvider implements AWSCredentialsProvider {
 
   @Override
