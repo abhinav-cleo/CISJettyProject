@@ -12,7 +12,7 @@ export class DashboardComponent {
     public dataKeys: string[] = [];
     public tableName: string = "STOCK";
     public base_url = "";
-    devices = ['Stock', 'VlTransfers', 'EventsTable'];
+    devices = ['Stock', 'EventsTable'];
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService) {
         this.dataLoaded = false;
@@ -34,7 +34,6 @@ export class DashboardComponent {
     private getData() {
         var dbResources  = {
             Stock: this.base_url + "/rest/cis/info?table=",
-            VlTransfers: this.base_url + "/rest/transfers/data?table=",
             EventsTable : this.base_url +"/rest/awsService/getEventsFromDB?table="
         }
         this.resources = [];
