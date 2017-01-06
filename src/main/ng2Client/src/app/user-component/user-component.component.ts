@@ -60,7 +60,7 @@ export class UserComponentComponent implements OnInit {
                 this.getAllUserRoles();
             },
             error => {
-                this.alertService.error("All Users Fetching Failed");
+                this.alertService.error(JSON.parse(error['_body']).ERROR);
                 console.log('Data reading to the API failed');
 
             },

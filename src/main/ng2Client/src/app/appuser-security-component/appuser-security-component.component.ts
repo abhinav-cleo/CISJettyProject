@@ -59,7 +59,7 @@ export class AppuserSecurityComponent implements OnInit {
                 this.getAllUserRoles();
             },
             error => {
-                this.alertService.error("User Fetching Failed");
+                this.alertService.error(JSON.parse(error['_body']).ERROR);
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
 
             },
