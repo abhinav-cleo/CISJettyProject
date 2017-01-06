@@ -32,13 +32,14 @@ export class DashboardComponent {
     }
 
     private getData() {
+        this.selectedDevice = this.base_url +"/rest/awsService/getEventsFromDB?table=";
         var dbResources  = {
-            Stock: this.base_url + "/rest/cis/info?table=",
             EventsTable : this.base_url +"/rest/awsService/getEventsFromDB?table="
         }
         this.resources = [];
         this.dataKeys = [];
-        var url = dbResources[this.selectedDevice]+ this.selectedDevice;
+
+        var url = this.selectedDevice+ "EventsTable";
         return this._backend.readData(url).subscribe(
             (data: Response) => {
                 this.resources = JSON.parse(data['_body']);

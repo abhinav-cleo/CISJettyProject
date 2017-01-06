@@ -48,9 +48,6 @@ public class ShirosProvider {
         System.out.println("\n\n adding user account ." + userName);
         Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
         String roles = section.get(userName);
-        if(roles == null) {
-          continue;
-        }
         addUserWithRoles(userName,roles);
       } catch (IOException e) {
         e.printStackTrace();
@@ -83,6 +80,9 @@ public class ShirosProvider {
   public static boolean addUserWithRoles(String userName, String rolesInfo) throws IOException, AuthException {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
+    if(rolesInfo == null) {
+      rolesInfo = "dummyRole";
+    }
     section.put(userName, rolesInfo);
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
@@ -92,7 +92,7 @@ public class ShirosProvider {
   public static boolean addRole(String roleName) {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.ROLES_SECTION_NAME);
-    section.put(roleName, "Welcome@2");
+    section.put(roleName, "");
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
     return true;

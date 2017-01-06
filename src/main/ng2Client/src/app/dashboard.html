@@ -2,12 +2,12 @@
   <div class="panel-heading" data-qa="transfers-header">
     <pre>CIS Dashboard</pre>
   </div>
-  <div>
-      <label> Select Table Name </label>
-      <select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)" name="sel2">
-          <option [value]="i" *ngFor="let i of devices">{{i}}</option>
-      </select>
-  </div>
+  <!--<div>-->
+      <!--<label> Select Table Name </label>-->
+      <!--<select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)" name="sel2">-->
+          <!--<option [value]="i" *ngFor="let i of devices">{{i}}</option>-->
+      <!--</select>-->
+  <!--</div>-->
     <table class="table table-bordered table-striped table-responsive" data-qa="transfers-table" *ngIf="dataLoaded">
         <thead>
         <tr>
