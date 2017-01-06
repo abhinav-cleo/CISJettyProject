@@ -8,6 +8,8 @@ import com.amazonaws.auth.AWSCredentials;
  */
 public class AWSUtils {
 
+
+
   public static AWSCredentials getCredentials() {
     AWSCredentials credentials = null;
     try {
@@ -15,14 +17,14 @@ public class AWSUtils {
 
         @Override
         public String getAWSSecretKey() {
-          // TODO Auto-generated method stub
-          return "9Jd1dG/7QvMuK3YbIDOiHvz8Ubh2+AMWmaghfjqZ";
+          String aws_secret_key = System.getProperty("AWS_SECRET_KEY");
+          System.out.println(aws_secret_key);
+          return aws_secret_key;
         }
 
         @Override
         public String getAWSAccessKeyId() {
-          // TODO Auto-generated method stub
-          return "AKIAJF67V6PNE7IUXF3A";
+          return System.getProperty("AWS_ACCESS_KEY_ID");
         }
       };
     } catch (Exception e) {
