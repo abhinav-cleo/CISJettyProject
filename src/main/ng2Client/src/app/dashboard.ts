@@ -17,8 +17,8 @@ export class DashboardComponent {
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.dataLoaded = false;
-        this.base_url = "http://ec2-35-166-90-134.us-west-2.compute.amazonaws.com:8680";
-        //this.base_url = "http://localhost:8680";
+        //this.base_url = "http://ec2-35-167-20-157.us-west-2.compute.amazonaws.com:8680";
+        this.base_url = "http://localhost:8680";
     }
 
     onChange(newValue) {
@@ -27,8 +27,8 @@ export class DashboardComponent {
     }
 
     ngOnInit() {
-        //this.base_url = "http://localhost:8680";
-        this.base_url = "http://ec2-35-166-90-134.us-west-2.compute.amazonaws.com:8680";
+        this.base_url = "http://localhost:8680";
+        //this.base_url = "http://ec2-35-166-90-134.us-west-2.compute.amazonaws.com:8680";
         this.dataLoaded = false;
         this.read = this.getData();
     }
