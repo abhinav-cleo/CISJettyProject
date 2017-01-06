@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
+import {Observable} from "rxjs";
 @Injectable()
 export class DashboardDataService {
 
@@ -8,8 +9,8 @@ export class DashboardDataService {
     }
 
     readData(param) {
-        return this.http.get(param)
-            .map(response => response);
+        return Observable.interval(5000)
+            .switchMap(() => this.http.get(param));
     }
 
     login(params) {
