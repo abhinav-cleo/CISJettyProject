@@ -85,8 +85,8 @@ public class AWSDynamoClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String data = "{'name':{'type':'FileCreatedTrigger','triggerId':'0ea2dafc-4c65-4f68-b096-d293751ec99b',\n" +
-                "'actionId':'KHhk2cy5ScaAc7vCr4ZHnA','status':'SUCCESS'}}";
+        String data = "{'type':'FileCreatedTrigger','triggerId':'0ea2dafc-4c65-4f68-b096-d293751ec99b',\n" +
+                "'actionId':'KHhk2cy5ScaAc7vCr4ZHnA','status':'SUCCESS'}";
         JSONObject jsonObject = new JSONObject(data);
         addEventToTable(jsonObject.toString());
         JSONArray eventsFromTable = getEventsFromTable();
