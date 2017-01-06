@@ -1,6 +1,7 @@
 import {DashboardDataService} from "./dashboard-data.service";
 import {Response} from "@angular/http";
 import {Component} from "@angular/core";
+import {AlertServiceService} from "./alert-service.service";
 @Component({
     selector: 'dashboard',
     templateUrl: './dashboard.html'
@@ -14,7 +15,7 @@ export class DashboardComponent {
     public base_url = "";
     devices = ['Stock', 'EventsTable'];
     selectedDevice = 'Stock';
-    constructor(private _backend: DashboardDataService) {
+    constructor(private _backend: DashboardDataService, private alertService: AlertServiceService) {
         this.dataLoaded = false;
         this.base_url = "http://localhost:8680";
     }
@@ -49,9 +50,11 @@ export class DashboardComponent {
                 console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
                 this.resources = JSON.parse(data['_body']);
                 this.dataKeys = this.generateKeys(this.resources[0]);
+                this.alertService.success("Data Fetched Successfully");
                 this.dataLoaded = true;
             },
             error => {
+                this.alertService.error(error);
                 console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
                 this.dataLoaded = true;
             },
