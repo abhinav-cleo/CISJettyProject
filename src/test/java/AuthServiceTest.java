@@ -1,15 +1,12 @@
-import com.cleo.cis.server.auth.AuthService;
+import com.cleo.cis.server.services.AuthService;
+import com.cleo.cis.server.auth.common.AuthException;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rohit on 03/01/17.
@@ -25,8 +22,8 @@ public class AuthServiceTest {
   @Test
   @RunInThread
   public void testLoginSuccess() throws Exception {
-    String testUserName  = "lonestarr";
-    String testPassword = "vespa";
+    String testUserName  = "reportUser";
+    String testPassword = "Welcome@2";
     Response response = null;
     response = new AuthService().login(testUserName, testPassword);
     Assert.assertEquals(200,response.getStatus());
@@ -67,9 +64,10 @@ public class AuthServiceTest {
 
   @Test
   @RunInThread
-  public void testGetUsers() {
+  public void testGetUsers() throws Exception {
     System.out.println("Fetching all the users.");
     AuthService authService = new AuthService();
+    authService.login("viewUser","Welcome@2");
     Response response = authService.users();
     Assert.assertEquals(200,response.getStatus());
     String userJSON = response.getEntity().toString();
@@ -118,6 +116,7 @@ public class AuthServiceTest {
     response = authService.createUser(testUser, testUser);
     Assert.assertEquals(200,response.getStatus());
     authService.assignRole(testUser,testRole);
+    authService.login("viewUser","password");
     response  = authService.users();
     Assert.assertEquals(200,response.getStatus());
     Assert.assertTrue(response.getEntity().toString().contains(testUser));
@@ -130,12 +129,11 @@ public class AuthServiceTest {
   public void testPermissions() throws Exception {
     System.out.println("Checking Permissions.");
     AuthService authService = new AuthService();
-    String testRole = "schwartz";
+    String testRole = "viewUserRole";
     Response response = authService.permissions(testRole);
     Assert.assertEquals(200,response.getStatus());
     String perms = response.getEntity().toString();
-    Assert.assertTrue(perms.contains("lightsaber"));
-    Assert.assertTrue(perms.contains("spaceship"));
+    Assert.assertTrue(perms.contains("User"));
     String assetName = "car";
     authService.addAsset(assetName);
     String actionName = "crash";
@@ -145,9 +143,8 @@ public class AuthServiceTest {
     response = authService.permissions(testRole);
     Assert.assertEquals(200,response.getStatus());
     perms = response.getEntity().toString();
-    Assert.assertTrue(perms.contains("lightsaber"));
-    Assert.assertTrue(perms.contains("spaceship"));
     Assert.assertTrue(perms.contains("car"));
+    Assert.assertTrue(perms.contains("User"));
 
   }
 

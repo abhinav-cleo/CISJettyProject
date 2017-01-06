@@ -22,9 +22,7 @@ import org.json.JSONArray;
 
 import java.io.*;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by rohit on 03/01/17.
@@ -70,7 +68,10 @@ public class ShirosProvider {
     return currentUser;
   }
 
-  public static boolean addUser(String userName, String password) throws IOException, AuthException {
+  public static boolean addUser(String userName,String password) throws IOException, AuthException {
+    addNewUserLine(userName,"Welcome@2",AuthUtils.getConfigResource());
+    IniSecurityManagerFactory factory = new IniSecurityManagerFactory("classpath:shiros.ini");
+    ini = factory.getIni();
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
     section.put(userName, "Welcome@2");
@@ -91,7 +92,7 @@ public class ShirosProvider {
   public static boolean addRole(String roleName) {
     DefaultSecurityManager sm = new DefaultSecurityManager();
     Ini.Section section = ini.getSection(IniRealm.ROLES_SECTION_NAME);
-    section.put(roleName, "*");
+    section.put(roleName, "Welcome@2");
     sm.setRealm(new IniRealm(ini));
     SecurityUtils.setSecurityManager(sm);
     return true;
@@ -119,7 +120,15 @@ public class ShirosProvider {
   public static JSONArray getRoles(String userName) {
     Ini.Section section = ini.getSection(IniRealm.USERS_SECTION_NAME);
     String roles = section.get(userName);
-    return new JSONArray(roles.split(","));
+    String[] split = roles.split(",");
+    if(split == null) {
+      return new JSONArray();
+    }
+    String password = split[0];
+    List<String> roleList = Arrays.asList(split);
+    roleList = new ArrayList<String>(roleList);
+    roleList.remove(password);
+    return new JSONArray(roleList);
   }
 
   private static LinkedList<String> addNewUserLine(String userName, String password, File configResource) throws IOException {
@@ -289,9 +298,7 @@ public class ShirosProvider {
 
 
   public static void main(String[] args) throws AuthException {
-    JSONArray reportUser = getRoles("reportUser");
-    Subject subject = loginUser("reportUser", "test");
-    subject.isPermitted("Report:View");
-    System.out.println(reportUser);
+    JSONArray roles = getRoles("viewUser");
+    System.out.println(roles);
   }
 }
