@@ -55,7 +55,7 @@ public class StormPathProvider {
     JSONArray userArray = new JSONArray();
     for (Account acct : accounts) {
       System.out.println("Found Account: " + acct.getHref() + ", " + acct.getEmail());
-      userArray.put(acct.getEmail());
+      userArray.put(acct.getUsername());
     }
     return userArray;
   }

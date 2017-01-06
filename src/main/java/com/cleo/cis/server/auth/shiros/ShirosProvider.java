@@ -45,9 +45,10 @@ public class ShirosProvider {
     System.out.println("\n\n loading the users from storm database.");
     JSONArray userAccounts = StormPathProvider.getUserAccounts();
     for(int i=0;i<userAccounts.length();i++) {
-      String useremail = userAccounts.get(0).toString();
+      String userName = userAccounts.get(i).toString();
       try {
-        addUser(useremail,"Welcome@2");
+        System.out.println("\n\n adding user account ." + userName);
+        addUser(userName,"Welcome@2");
       } catch (IOException e) {
         e.printStackTrace();
       } catch (AuthException e) {
