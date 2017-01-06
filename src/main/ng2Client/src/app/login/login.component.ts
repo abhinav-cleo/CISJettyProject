@@ -1,34 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Response} from "@angular/http";
 import {DashboardDataService} from "../dashboard-data.service";
 import {AlertServiceService} from "../alert-service.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
-  private user: string;
-  private password: string;
+    private user: string;
+    private password: string;
 
-  constructor(private router: Router, private _backend: DashboardDataService, private alertService: AlertServiceService) { }
+    constructor(private router: Router, private _backend: DashboardDataService, private alertService: AlertServiceService) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
     signed() {
         var params = {
-            "id":this.user,
+            "id": this.user,
             "password": this.password
         };
         this._backend.login(params).subscribe(
-            (data:Response) => {
-                if(data){
+            (data: Response) => {
+                if (data) {
+                    this.router.navigate(['/main']);
                     this.alertService.success("Logged In Successfully");
-                  this.router.navigate(['/main']);
                 }
                 else {
                     this.alertService.error("Login Failed");

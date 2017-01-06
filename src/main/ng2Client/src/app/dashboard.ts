@@ -21,7 +21,6 @@ export class DashboardComponent {
     }
 
     onChange(newValue) {
-        console.log(newValue);
         this.selectedDevice = newValue;
         this.getData();
     }
@@ -40,26 +39,19 @@ export class DashboardComponent {
         this.resources = [];
         this.dataKeys = [];
         var url = dbResources[this.selectedDevice]+ this.selectedDevice;
-        // if(this.selectedDevice == 'Stock'){
-        //     url = 'http://localhost:8680/rest/cis/info?table='+this.selectedDevice;
-        // }else{
-        //     url = 'http://10.20.101.250:8680/rest/transfers/data?table='+this.selectedDevice
-        // }
         return this._backend.readData(url).subscribe(
             (data: Response) => {
-                console.log('success', 'Data is been fetched from the API Successfully', 'Data is been fetched from the API Successfully');
                 this.resources = JSON.parse(data['_body']);
                 this.dataKeys = this.generateKeys(this.resources[0]);
                 this.alertService.success("Data Fetched Successfully");
                 this.dataLoaded = true;
             },
             error => {
-                this.alertService.error(error);
-                console.log('error', 'Data reading to the API failed', 'Data reading to the API failed');
+                this.alertService.error(error._body);
                 this.dataLoaded = true;
             },
-            () => console.log('Reading Data complete')
-        );
+            () => {}
+        );;
     }
 
     generateKeys(obj): string[] {
