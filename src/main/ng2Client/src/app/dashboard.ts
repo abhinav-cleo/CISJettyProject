@@ -11,10 +11,12 @@ export class DashboardComponent {
     public dataLoaded: boolean = false;
     public dataKeys: string[] = [];
     public tableName: string = "STOCK";
+    public base_url = "";
     devices = ['Stock', 'VlTransfers', 'EventsTable'];
     selectedDevice = 'Stock';
     constructor(private _backend: DashboardDataService) {
         this.dataLoaded = false;
+        this.base_url = "http://localhost:8680";
     }
 
     onChange(newValue) {
@@ -24,15 +26,16 @@ export class DashboardComponent {
     }
 
     ngOnInit() {
+        this.base_url = "http://localhost:8680";
         this.dataLoaded = false;
         this.read = this.getData();
     }
 
     private getData() {
         var dbResources  = {
-            Stock: "http://localhost:8680/rest/cis/info?table=",
-            VlTransfers: "http://localhost:8680/rest/transfers/data?table=",
-            EventsTable : "http://localhost:8680/rest/awsService/getEventsFromDB?table="
+            Stock: this.base_url + "/rest/cis/info?table=",
+            VlTransfers: this.base_url + "/rest/transfers/data?table=",
+            EventsTable : this.base_url +"/rest/awsService/getEventsFromDB?table="
         }
         this.resources = [];
         this.dataKeys = [];
