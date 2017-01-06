@@ -2,6 +2,8 @@ package com.cleo.cis.server.services;
 
 import com.cleo.cis.server.AWS.DB.AWSDynamoClient;
 import com.cleo.cis.server.AWS.SQS.AWSSQSClient;
+import com.cleo.cis.server.auth.perm.ActionsRepo;
+import com.cleo.cis.server.auth.perm.AssetRepo;
 import com.cleo.cis.server.auth.shiros.ShirosProvider;
 import org.json.JSONArray;
 
@@ -56,6 +58,22 @@ public class AWSService {
   @Path("/getEventsFromDB")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getEventsFromDB(@QueryParam("table") String tableName){
+    if(ShirosProvider.loggedInUser == null) {
+      System.out.println("\n\n\n\n ------- user is null  login first");
+      return Response.status(Response.Status.NOT_FOUND).entity("User is not logged in.")
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+    }
+
+    if(!ShirosProvider.loggedInUser.isPermitted(AssetRepo.reportAsset+":" + ActionsRepo.view)) {
+      System.out.println("\n\n\n - -Permissions not possible for the user  " + ShirosProvider.loggedInUser.toString());
+      return Response.status(Response.Status.NOT_FOUND).entity("User is not allowed to view this resource.")
+              .header("Access-Control-Allow-Origin", "*")
+              .header("Access-Control-Allow-Methods", "*")
+              .build();
+    }
+
     JSONArray eventsFromTable = AWSDynamoClient.getEventsFromTable();
     return Response.status(Response.Status.OK).entity(eventsFromTable.toString())
             .header("Access-Control-Allow-Origin", "*")

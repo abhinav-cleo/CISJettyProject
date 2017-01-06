@@ -13,6 +13,14 @@ import java.util.Set;
 public class AssetRepo {
 
   private static Set<String> assetSet = Collections.synchronizedSet(new HashSet<>());
+  public static String reportAsset = "Report";
+  public static String userAsset = "User";
+
+  static {
+    assetSet.add(userAsset);
+    assetSet.add(reportAsset);
+
+  }
 
   public static void addAsset(String assetName) throws AuthException {
     if(assetSet.contains(assetName)) {

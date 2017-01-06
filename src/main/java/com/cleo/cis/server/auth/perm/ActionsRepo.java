@@ -13,6 +13,16 @@ import java.util.Set;
 public class ActionsRepo {
 
   private static Set<String> actionsSet = Collections.synchronizedSet(new HashSet<>());
+  public static String view = "View";
+  public static String add = "Add";
+  public static String delete = "Delete";
+
+  static {
+    actionsSet.add(view);
+    actionsSet.add(add);
+    actionsSet.add(delete);
+  }
+
   public static void addAction(String assetName) throws AuthException {
     if(actionsSet.contains(assetName)) {
 

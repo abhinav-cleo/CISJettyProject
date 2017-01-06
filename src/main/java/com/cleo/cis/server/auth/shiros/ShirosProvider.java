@@ -33,6 +33,8 @@ public class ShirosProvider {
 
   private static String CONFIG_USER_FIND_LINE = "repalcementUser=replacementPassword";
 
+  public static Subject loggedInUser;
+
   static IniSecurityManagerFactory factory = new IniSecurityManagerFactory("classpath:shiros.ini");
   static Ini ini = factory.getIni();
 
@@ -191,6 +193,7 @@ public class ShirosProvider {
       token.setRememberMe(false);
       try {
         currentUser.login(token);
+        loggedInUser = currentUser;
       } catch (UnknownAccountException uae) {
         throw new AuthException("There is no user with username of " + token.getPrincipal());
       } catch (IncorrectCredentialsException ice) {
@@ -259,7 +262,7 @@ public class ShirosProvider {
       if(perms.contains(assetName+":"+action)){
         throw new AuthException("This permission is already assigned to this role.");
       }
-      perms = perms + assetName + ":" + action;
+      perms = perms + ","+assetName + ":" + action;
       section.put(roleName,perms);
     } else {
       section.put(roleName,assetName + ":" + action);
