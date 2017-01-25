@@ -18,13 +18,15 @@ public class AWSUtils {
         @Override
         public String getAWSSecretKey() {
           String aws_secret_key = System.getProperty("AWS_SECRET_KEY");
-          System.out.println(aws_secret_key);
-          return aws_secret_key;
+          System.out.println("Secret key here: "+"b329IjEs3szUVxub2s/hdrpysKmpaANqQLSFbDsu");
+          return "b329IjEs3szUVxub2s/hdrpysKmpaANqQLSFbDsu";
         }
 
         @Override
         public String getAWSAccessKeyId() {
-          return System.getProperty("AWS_ACCESS_KEY_ID");
+          System.out.println("access key here: "+"AKIAJ2QSLLMFPAKDLA4A");
+          return "AKIAJ2QSLLMFPAKDLA4A";
+                  //System.getProperty("AWS_ACCESS_KEY_ID");
         }
       };
     } catch (Exception e) {
